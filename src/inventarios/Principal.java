@@ -5,6 +5,17 @@
  */
 package inventarios;
 
+import Logica.conexion;
+import java.io.File;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author Dev
@@ -16,6 +27,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -30,9 +42,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        mnuSalir = new javax.swing.JMenuItem();
         mnuAgregar = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        mnuListado = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -41,6 +55,14 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem1.setText("Usuario");
         jMenu1.add(jMenuItem1);
+
+        mnuSalir.setText("Salir");
+        mnuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSalirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuSalir);
 
         jMenuBar1.add(jMenu1);
 
@@ -57,6 +79,15 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(mnuAgregar);
 
         jMenu3.setText("Reportes");
+
+        mnuListado.setText("Listado Completo");
+        mnuListado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuListadoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuListado);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Respaldos");
@@ -79,10 +110,33 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       frmInventario frm=new frmInventario();
-       frm.setVisible(true);
-       this.dispose();
+        frmInventario frm = new frmInventario();
+        frm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void mnuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_mnuSalirActionPerformed
+    private Connection connection = new conexion().conectar();
+    private void mnuListadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuListadoActionPerformed
+        //Impresion de inventario
+
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/reportes/rptListadoInventario.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Inventarios");
+            view.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_mnuListadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,5 +181,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu mnuAgregar;
+    private javax.swing.JMenuItem mnuListado;
+    private javax.swing.JMenuItem mnuSalir;
     // End of variables declaration//GEN-END:variables
 }

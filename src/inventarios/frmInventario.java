@@ -77,6 +77,10 @@ void mostrarTabla(){
           tabla.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
           tabla.setFont(new java.awt.Font("Tahoma", 0, 12));
        }
+       // asignamos la columna 0 para esconderla
+       tabla.getColumnModel().getColumn(0).setMaxWidth(0);
+       tabla.getColumnModel().getColumn(0).setMinWidth(0);
+       tabla.getColumnModel().getColumn(0).setPreferredWidth(0);
        txtTotal.setText(Integer.toString(total));
        }
        catch (SQLException ex){
@@ -142,7 +146,7 @@ void inicio(){
         btnCancelar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnMenu = new javax.swing.JButton();
         btnImpresion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -412,8 +416,13 @@ void inicio(){
 
         txtTotal.setText("0");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Graficos/inicio.png"))); // NOI18N
-        jButton1.setText("Regresar al menu");
+        btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Graficos/inicio.png"))); // NOI18N
+        btnMenu.setText("Regresar al menu");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
 
         btnImpresion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Graficos/impresion.png"))); // NOI18N
         btnImpresion.setText("Imprimir Listado");
@@ -436,7 +445,7 @@ void inicio(){
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnMenu)
                                 .addGap(43, 43, 43)
                                 .addComponent(btnImpresion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -457,7 +466,7 @@ void inicio(){
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel10)
                                 .addComponent(txtTotal)
-                                .addComponent(jButton1))
+                                .addComponent(btnMenu))
                             .addComponent(btnImpresion))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -818,6 +827,12 @@ void inicio(){
         }
         
     }//GEN-LAST:event_btnImpresionActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+       Principal frm=new Principal();
+       frm.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_btnMenuActionPerformed
     
     /**
      * @param args the command line arguments
@@ -863,9 +878,9 @@ void inicio(){
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnGrabar;
     private javax.swing.JButton btnImpresion;
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox<String> cbounidad;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

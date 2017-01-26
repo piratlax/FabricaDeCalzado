@@ -14,6 +14,14 @@
                 <Property name="text" type="java.lang.String" value="Usuario"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuSalir">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Salir"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuSalirActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnuAgregar">
@@ -35,6 +43,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuListado">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Listado Completo"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuListadoActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu4">
           <Properties>

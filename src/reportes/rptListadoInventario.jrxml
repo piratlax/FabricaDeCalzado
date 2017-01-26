@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptListadoInventario" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bf617dc3-62f8-4d67-90be-a4d96aec1ae2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     inventario.`idinventario` AS inventario_idinventario,
+     inventario.`codigo` AS inventario_codigo,
+     inventario.`nombre` AS inventario_nombre,
+     inventario.`pieza` AS inventario_pieza,
+     inventario.`cantidad` AS inventario_cantidad,
+     inventario.`medida` AS inventario_medida,
+     inventario.`prometido` AS inventario_prometido,
+     inventario.`prometido_cantidad` AS inventario_prometido_cantidad,
+     inventario.`minimo` AS inventario_minimo
+FROM
+     `inventario` inventario]]>
+	</queryString>
+	<field name="inventario_idinventario" class="java.lang.Integer"/>
+	<field name="inventario_codigo" class="java.lang.String"/>
+	<field name="inventario_nombre" class="java.lang.String"/>
+	<field name="inventario_pieza" class="java.lang.String"/>
+	<field name="inventario_cantidad" class="java.math.BigDecimal"/>
+	<field name="inventario_medida" class="java.lang.String"/>
+	<field name="inventario_minimo" class="java.math.BigDecimal"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="72" backcolor="#FF3333" uuid="b4a16d42-0a8d-4505-ae78-67d7098cf91f"/>
+				<staticText>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="9de17262-5ab5-491e-b3bd-0cac51f4f58c"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[San Felipe]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="324" y="43" width="227" height="20" forecolor="#FFFFFF" uuid="8db1d7ac-3019-427b-8678-65b828951070"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Listado Total de Inventario]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="20" width="551" height="1" uuid="9367ba15-3807-4e9c-ac59-b6d02667279e"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="50" height="20" uuid="dd28d267-d8a9-4e02-bc30-8922720925e7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="0" width="335" height="20" uuid="6976beec-fbb6-4f69-936b-bca3599ede86"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="385" y="0" width="166" height="20" uuid="364d8fbb-d83e-4bce-a64a-c21f45b0fe4a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pieza]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22">
+			<textField>
+				<reportElement x="0" y="0" width="50" height="20" uuid="a06472ef-3817-4c75-bc51-9fbf557232ce"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inventario_codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="0" width="335" height="20" uuid="76b52439-2036-4982-8936-67e11b5527f1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inventario_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="2" width="166" height="20" uuid="636fc1be-2dd4-41f2-9e25-9208104bf943"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inventario_pieza}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="514" height="13" backcolor="#E6E6E6" uuid="0c9f9699-5eb0-4839-9507-71bf309a7a9e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="d6826281-24ba-4d25-82a6-fd55f1f479c7"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="36352681-74ab-418c-989a-784119054e8b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="551" height="1" uuid="c7ae507a-7ebf-4e06-8c97-163bf872f9ed"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
