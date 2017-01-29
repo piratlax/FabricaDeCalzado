@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptListadoExistencias" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5dc9c350-d89b-480b-9571-226670d421cf">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="30"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     inventario.`cantidad`-inventario.`prometido_cantidad` AS total,
+     inventario.`codigo` AS inventario_codigo,
+     inventario.`nombre` AS inventario_nombre,
+     inventario.`pieza` AS inventario_pieza,
+     inventario.`cantidad` AS inventario_cantidad,
+     inventario.`medida` AS inventario_medida,
+     inventario.`prometido` AS inventario_prometido,
+     inventario.`prometido_cantidad` AS inventario_prometido_cantidad,
+     inventario.`minimo` AS inventario_minimo
+
+FROM
+     `inventario` inventario
+WHERE
+     (inventario.`cantidad`-inventario.`prometido_cantidad`)<inventario.`minimo`		]]>
+	</queryString>
+	<field name="total" class="java.math.BigDecimal"/>
+	<field name="inventario_codigo" class="java.lang.String"/>
+	<field name="inventario_nombre" class="java.lang.String"/>
+	<field name="inventario_pieza" class="java.lang.String"/>
+	<field name="inventario_cantidad" class="java.math.BigDecimal"/>
+	<field name="inventario_medida" class="java.lang.String"/>
+	<field name="inventario_prometido" class="java.sql.Date"/>
+	<field name="inventario_prometido_cantidad" class="java.math.BigDecimal"/>
+	<field name="inventario_minimo" class="java.math.BigDecimal"/>
+	<field name="minimo" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="752" height="40" backcolor="#FF6666" uuid="f1777336-5d84-486a-bef3-3e7c826f294f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="14" y="0" width="100" height="20" uuid="962207ac-5742-454b-a810-30b08604bd41"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[San Felipe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="20" width="210" height="20" uuid="a140f139-862b-413b-9e85-e4cf5948350a"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Maquiladora de Calzado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="542" y="0" width="210" height="20" uuid="cc021537-3808-4e39-afba-5d2644ecb6c3"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Area de Inventario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="542" y="20" width="210" height="20" uuid="5a60a661-9e6f-43b6-8f13-918253ab81ff"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Listado de Faltantes]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="47" y="8" width="100" height="20" uuid="b00d4828-fc08-426c-a5a6-e26c7666d196"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="8" width="47" height="20" uuid="8fcb1c9e-6018-4466-b95d-616ce4b1a526"/>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="8" width="100" height="20" uuid="79a4bb5a-de59-4b2c-8bf1-76b117121643"/>
+				<text><![CDATA[Pieza]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="521" y="8" width="46" height="20" uuid="42a07e19-f751-460a-b406-fedbea1bf020"/>
+				<text><![CDATA[Medida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="567" y="8" width="52" height="20" uuid="394b07eb-3ab4-4e9a-83cb-7b9a42197607"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="619" y="8" width="58" height="20" uuid="490f14e4-9c51-41e5-b68e-5c59d3d54b8f"/>
+				<text><![CDATA[Prometido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="677" y="8" width="75" height="20" uuid="2baa9b35-3306-433c-9f60-c61eca9a34f9"/>
+				<text><![CDATA[minimo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="47" y="0" width="328" height="20" uuid="716c7dac-47ae-48e5-8a3d-ba6200886798"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inventario_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="47" height="20" uuid="d3758e9c-e1fa-4976-bee3-6f8e4411e86b"/>
+				<textFieldExpression><![CDATA[$F{inventario_codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="0" width="146" height="20" uuid="80c761c8-c27a-4853-ae3c-5541ddc3c120"/>
+				<textFieldExpression><![CDATA[$F{inventario_pieza}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="521" y="0" width="46" height="20" uuid="f1904986-e643-4b72-832b-042704f0eab2"/>
+				<textFieldExpression><![CDATA[$F{inventario_medida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="567" y="0" width="52" height="20" uuid="e1024821-d42e-4c0c-981a-fc11ea3442dd"/>
+				<textFieldExpression><![CDATA[$F{inventario_cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="619" y="1" width="58" height="20" uuid="841a1046-efdb-46e6-a303-841dba4e1028"/>
+				<textFieldExpression><![CDATA[$F{inventario_prometido_cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="677" y="1" width="75" height="20" uuid="9bedda42-6933-4062-8e96-73e35825db10"/>
+				<textFieldExpression><![CDATA[$F{minimo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="0" width="100" height="13" uuid="a189da8b-902e-4c31-92ae-1fdf3f7e8beb"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="100" y="0" width="561" height="13" backcolor="#E6E6E6" uuid="e8a82e95-5e1a-43b6-93b1-42afa834037e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="661" y="0" width="40" height="13" backcolor="#E6E6E6" uuid="1d6a7cb0-48a9-4c0e-84a6-7a7c7f41cb4b"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
