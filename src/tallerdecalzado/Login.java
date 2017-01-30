@@ -5,6 +5,8 @@
  */
 package tallerdecalzado;
 
+import inventarios.Principal;
+import inventarios.frmInventario;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
@@ -28,6 +30,7 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
        ImageIcon img = new ImageIcon("Graficos/icono.png");
        this.setIconImage(img.getImage());
+       txtUsuario.requestFocus();
     }
     public Image getIconImage(){
      Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Graficos/icono.png"));
@@ -43,9 +46,9 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtClave = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -59,18 +62,23 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("CLAVE");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 340, -1));
+        txtUsuario.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 340, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("USUARIO");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, -1, -1));
 
-        jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 340, -1));
+        txtClave.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        getContentPane().add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 340, -1));
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setText("ACCEDER");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, 120, 50));
 
         btnSalir.setText("SALIR");
@@ -90,6 +98,22 @@ public class Login extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       // Acceso
+        if (txtUsuario.getText().equals("Leonardo")){
+            //catalogo frm=new catalogo();
+            //frm.setVisible(true);
+            this.dispose();
+        }else if(txtUsuario.getText().equals("Jaime")){
+            Principal frm=new Principal();
+            frm.setVisible(true);
+            this.dispose();
+        }else {
+            JOptionPane.showMessageDialog(null, "Escribe bien el usuario");
+            txtUsuario.setText("");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,7 +157,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField txtClave;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
