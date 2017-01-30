@@ -57,6 +57,7 @@ public class catalogo extends javax.swing.JFrame {
         btnImagen.setEnabled(false);
 
         //desactivamos los campos que no se podran tocar
+        /*
         txtSubManipulacion.setEnabled(false);
         txtSubManipulacion1.setEnabled(false);
         txtSubManipulacion2.setEnabled(false);
@@ -66,6 +67,7 @@ public class catalogo extends javax.swing.JFrame {
         txtSubTotal.setEnabled(false);
         txtCostoFabricacion.setEnabled(false);
         txtUtilidad.setEnabled(false);
+        */
         btnGuardar.setEnabled(false);
 
     }
@@ -223,7 +225,6 @@ public class catalogo extends javax.swing.JFrame {
         txtColor = new javax.swing.JTextField();
         btnEditar = new javax.swing.JButton();
         btnCrear = new javax.swing.JButton();
-        chkActivo = new javax.swing.JCheckBox();
         panel = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -237,7 +238,6 @@ public class catalogo extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtSubManipulacion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtMaquila = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -245,6 +245,7 @@ public class catalogo extends javax.swing.JFrame {
         btnActMaquila = new javax.swing.JButton();
         btnNuevaMaquila = new javax.swing.JButton();
         btnActInventario = new javax.swing.JButton();
+        txtSubManipulacion = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -258,7 +259,6 @@ public class catalogo extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         txtPrecioCost = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        txtSubManipulacion1 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtMaquila1 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
@@ -266,6 +266,7 @@ public class catalogo extends javax.swing.JFrame {
         btnActMaquila1 = new javax.swing.JButton();
         btnNuevaMaquila1 = new javax.swing.JButton();
         btnActInventario1 = new javax.swing.JButton();
+        txtSubManipulacion1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -279,7 +280,6 @@ public class catalogo extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         txtPrecioIny = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        txtSubManipulacion2 = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         txtMaquila2 = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
@@ -287,6 +287,7 @@ public class catalogo extends javax.swing.JFrame {
         btnActMaquila2 = new javax.swing.JButton();
         btnNuevaMaquila2 = new javax.swing.JButton();
         btnActInventario2 = new javax.swing.JButton();
+        txtSubManipulacion2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         btnBorrar3 = new javax.swing.JButton();
@@ -298,22 +299,22 @@ public class catalogo extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        txtTotalMan = new javax.swing.JTextField();
-        txtTotalCos = new javax.swing.JTextField();
-        txtTotalIny = new javax.swing.JTextField();
         txtSalariosInyeccion = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
-        txtSubTotal = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
         txtGastosInd = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
-        txtCostoFabricacion = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
         txtPorcentaje = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
-        txtUtilidad = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         txtMerma = new javax.swing.JTextField();
+        txtTotalMan = new javax.swing.JLabel();
+        txtTotalCos = new javax.swing.JLabel();
+        txtTotalIny = new javax.swing.JLabel();
+        txtSubTotal = new javax.swing.JLabel();
+        txtCostoFabricacion = new javax.swing.JLabel();
+        txtUtilidad = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JLabel();
@@ -323,6 +324,7 @@ public class catalogo extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         imgCalzado = new javax.swing.JLabel();
         btnImagen = new javax.swing.JButton();
+        chkActivo = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -334,7 +336,7 @@ public class catalogo extends javax.swing.JFrame {
 
         jLabel3.setText("Articulo");
 
-        jLabel4.setText("Color");
+        jLabel4.setText("Combinacion");
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Graficos/editar.png"))); // NOI18N
         btnEditar.setText("Editar");
@@ -346,9 +348,6 @@ public class catalogo extends javax.swing.JFrame {
                 btnCrearActionPerformed(evt);
             }
         });
-
-        chkActivo.setSelected(true);
-        chkActivo.setText("Activo");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -371,11 +370,8 @@ public class catalogo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(chkActivo)))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel4))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCrear)
                     .addComponent(btnEditar))
@@ -394,9 +390,7 @@ public class catalogo extends javax.swing.JFrame {
                             .addComponent(jLabel4)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCrear)
-                            .addComponent(chkActivo))))
+                        .addComponent(btnCrear)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLinea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -481,6 +475,8 @@ public class catalogo extends javax.swing.JFrame {
             }
         });
 
+        txtSubManipulacion.setText("0");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -488,20 +484,6 @@ public class catalogo extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnBorrar)
-                                .addGap(581, 581, 581)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addGap(111, 111, 111)
-                                        .addComponent(txtSubManipulacion, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(0, 1, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
@@ -534,7 +516,19 @@ public class catalogo extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnIntegrar)))
+                        .addComponent(btnIntegrar))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnBorrar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10)
+                                .addGap(79, 79, 79)))
+                        .addGap(0, 1, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtSubManipulacion, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -577,7 +571,7 @@ public class catalogo extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBorrar)
                     .addComponent(jLabel10)
-                    .addComponent(txtSubManipulacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSubManipulacion))
                 .addContainerGap())
         );
 
@@ -625,8 +619,6 @@ public class catalogo extends javax.swing.JFrame {
 
         jLabel14.setText("SubTotal");
 
-        txtSubManipulacion1.setEditable(false);
-
         jLabel15.setText("Maquila");
 
         jLabel16.setText("Costo");
@@ -659,6 +651,8 @@ public class catalogo extends javax.swing.JFrame {
             }
         });
 
+        txtSubManipulacion1.setText("0");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -666,20 +660,6 @@ public class catalogo extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(btnBorrar1)
-                                .addGap(581, 581, 581)
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                                        .addGap(111, 111, 111)
-                                        .addComponent(txtSubManipulacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(0, 1, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
@@ -712,7 +692,19 @@ public class catalogo extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtPrecioCost, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnIntegrarCostura)))
+                        .addComponent(btnIntegrarCostura))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(btnBorrar1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel14)
+                                .addGap(97, 97, 97)))
+                        .addGap(0, 1, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtSubManipulacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -755,7 +747,7 @@ public class catalogo extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBorrar1)
                     .addComponent(jLabel14)
-                    .addComponent(txtSubManipulacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSubManipulacion1))
                 .addContainerGap())
         );
 
@@ -856,6 +848,8 @@ public class catalogo extends javax.swing.JFrame {
             }
         });
 
+        txtSubManipulacion2.setText("0");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -864,18 +858,14 @@ public class catalogo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addComponent(btnBorrar2)
                                 .addGap(581, 581, 581)
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                                        .addGap(111, 111, 111)
-                                        .addComponent(txtSubManipulacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addComponent(jLabel20)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(jLabel20)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSubManipulacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 1, Short.MAX_VALUE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -952,7 +942,7 @@ public class catalogo extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBorrar2)
                     .addComponent(jLabel20)
-                    .addComponent(txtSubManipulacion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSubManipulacion2))
                 .addContainerGap())
         );
 
@@ -985,7 +975,7 @@ public class catalogo extends javax.swing.JFrame {
 
         jLabel26.setText("SubTotal");
 
-        jPanel10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel10.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
         jLabel23.setText("Salarios para Inyeccion");
 
@@ -995,26 +985,9 @@ public class catalogo extends javax.swing.JFrame {
 
         jLabel27.setText("Total de Inyeccion y Terminacion");
 
-        txtTotalMan.setEditable(false);
-        txtTotalMan.setText("0.00");
-
-        txtTotalCos.setEditable(false);
-        txtTotalCos.setText("0.00");
-        txtTotalCos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTotalCosActionPerformed(evt);
-            }
-        });
-
-        txtTotalIny.setEditable(false);
-        txtTotalIny.setText("0.00");
-
         txtSalariosInyeccion.setText("0.00");
 
         jLabel28.setText("SubTotal");
-
-        txtSubTotal.setEditable(false);
-        txtSubTotal.setText("0.00");
 
         jLabel29.setText("Gastos Indirectos");
 
@@ -1022,24 +995,27 @@ public class catalogo extends javax.swing.JFrame {
 
         jLabel30.setText("Total Costo de fabricacion");
 
-        txtCostoFabricacion.setText("0.00");
-        txtCostoFabricacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCostoFabricacionActionPerformed(evt);
-            }
-        });
-
         jLabel31.setText("Utilidad");
 
         txtPorcentaje.setText("20");
 
         jLabel32.setText("%");
 
-        txtUtilidad.setText("0.00");
-
         jLabel33.setText("Merma");
 
         txtMerma.setText("0.00");
+
+        txtTotalMan.setText("0.00");
+
+        txtTotalCos.setText("0.00");
+
+        txtTotalIny.setText("0.00");
+
+        txtSubTotal.setText("0.00");
+
+        txtCostoFabricacion.setText("0.00");
+
+        txtUtilidad.setText("0.00");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1063,15 +1039,15 @@ public class catalogo extends javax.swing.JFrame {
                     .addComponent(jLabel33))
                 .addGap(100, 100, 100)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTotalIny)
-                    .addComponent(txtTotalMan, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                    .addComponent(txtTotalCos)
-                    .addComponent(txtSalariosInyeccion)
-                    .addComponent(txtSubTotal)
+                    .addComponent(txtSalariosInyeccion, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
                     .addComponent(txtGastosInd)
-                    .addComponent(txtCostoFabricacion)
-                    .addComponent(txtUtilidad)
-                    .addComponent(txtMerma))
+                    .addComponent(txtMerma)
+                    .addComponent(txtTotalMan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTotalCos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTotalIny, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtSubTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCostoFabricacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtUtilidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
@@ -1080,15 +1056,15 @@ public class catalogo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(txtTotalMan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTotalMan))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(txtTotalCos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTotalCos))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
-                    .addComponent(txtTotalIny, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTotalIny))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
@@ -1096,7 +1072,7 @@ public class catalogo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(txtSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSubTotal))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
@@ -1104,13 +1080,13 @@ public class catalogo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
-                    .addComponent(txtCostoFabricacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCostoFabricacion))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
                     .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel32)
-                    .addComponent(txtUtilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUtilidad))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
@@ -1118,7 +1094,7 @@ public class catalogo extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jPanel11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel11.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
         jLabel34.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1237,7 +1213,7 @@ public class catalogo extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 525, Short.MAX_VALUE)
+            .addGap(0, 510, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1276,6 +1252,9 @@ public class catalogo extends javax.swing.JFrame {
             }
         });
 
+        chkActivo.setSelected(true);
+        chkActivo.setText("Activo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1286,7 +1265,9 @@ public class catalogo extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnImagen))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(chkActivo)
+                        .addComponent(btnImagen)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
@@ -1299,6 +1280,8 @@ public class catalogo extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnImagen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chkActivo)
+                        .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -1855,7 +1838,6 @@ public class catalogo extends javax.swing.JFrame {
                     btnIntegrarInyeccion.setEnabled(true);
                     btnImagen.setEnabled(true);
                     chkActivo.setEnabled(false);
-                    txtSubManipulacion.setEnabled(false);
                     txtSubManipulacion.setText("0.00");
                     btnGuardar.setEnabled(true);
                     btnGuardar.setText("GUARDAR");
@@ -2409,18 +2391,10 @@ public class catalogo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnActInventario2ActionPerformed
 
-    private void txtTotalCosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalCosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalCosActionPerformed
-
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         // recalculamos todo
         calculoTotal();
     }//GEN-LAST:event_btnCalcularActionPerformed
-
-    private void txtCostoFabricacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoFabricacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCostoFabricacionActionPerformed
 
     private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
         // menu de introduccion de una Imagen
@@ -2490,13 +2464,14 @@ public class catalogo extends javax.swing.JFrame {
         Double gastos=Double.parseDouble(txtGastosInd.getText());
         Double utilidad=Double.parseDouble(txtUtilidad.getText());
         Double merma=Double.parseDouble(txtMerma.getText());
+        Double total=Double.parseDouble(txtTotal.getText());
         
         
         // pasamos toda la informacion a la base de datos calzado
         
         try {
             PreparedStatement ps;
-            ps = cn.prepareStatement("insert into calzado(linea,modelo,articulo,color,activo,manipulacion,costura,inyeccion,gastos,utilidad,merma,imagen) " + "values(?,?,?,?,?,?,?,?,?,?,?,?)");
+            ps = cn.prepareStatement("insert into calzado(linea,modelo,articulo,color,activo,manipulacion,costura,inyeccion,gastos,utilidad,merma,total,imagen) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1,linea);
             ps.setString(2,modelo);
             ps.setString(3,articulo);
@@ -2508,7 +2483,8 @@ public class catalogo extends javax.swing.JFrame {
             ps.setDouble(9,gastos);
             ps.setDouble(10,utilidad);
             ps.setDouble(11,merma);
-            ps.setBlob(12, bais);
+            ps.setDouble(12,total);
+            ps.setBlob(13, bais);
             ps.execute();
             ps.close();
             JOptionPane.showMessageDialog(null, "El calzado se ha integrado correctamente a la base de datos");
@@ -2818,7 +2794,7 @@ public class catalogo extends javax.swing.JFrame {
     private javax.swing.JTable tablaMan;
     private javax.swing.JTextField txtArticulo;
     private javax.swing.JTextField txtColor;
-    private javax.swing.JTextField txtCostoFabricacion;
+    private javax.swing.JLabel txtCostoFabricacion;
     private javax.swing.JTextField txtGastosInd;
     private javax.swing.JTextField txtLinea;
     private javax.swing.JTextField txtMaqIny;
@@ -2841,15 +2817,15 @@ public class catalogo extends javax.swing.JFrame {
     private javax.swing.JTextField txtPredecible2;
     private javax.swing.JLabel txtPrueba;
     private javax.swing.JTextField txtSalariosInyeccion;
-    private javax.swing.JTextField txtSubManipulacion;
-    private javax.swing.JTextField txtSubManipulacion1;
-    private javax.swing.JTextField txtSubManipulacion2;
+    private javax.swing.JLabel txtSubManipulacion;
+    private javax.swing.JLabel txtSubManipulacion1;
+    private javax.swing.JLabel txtSubManipulacion2;
     private javax.swing.JTextField txtSubManipulacion3;
-    private javax.swing.JTextField txtSubTotal;
+    private javax.swing.JLabel txtSubTotal;
     private javax.swing.JLabel txtTotal;
-    private javax.swing.JTextField txtTotalCos;
-    private javax.swing.JTextField txtTotalIny;
-    private javax.swing.JTextField txtTotalMan;
-    private javax.swing.JTextField txtUtilidad;
+    private javax.swing.JLabel txtTotalCos;
+    private javax.swing.JLabel txtTotalIny;
+    private javax.swing.JLabel txtTotalMan;
+    private javax.swing.JLabel txtUtilidad;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
  */
 package tallerdecalzado;
 
+import Calzado.CalzadoPrincipal;
 import inventarios.Principal;
 import inventarios.frmInventario;
 import java.awt.Image;
@@ -102,8 +103,8 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        // Acceso
         if (txtUsuario.getText().equals("Leonardo")){
-            //catalogo frm=new catalogo();
-            //frm.setVisible(true);
+            CalzadoPrincipal frm=new CalzadoPrincipal();
+            frm.setVisible(true);
             this.dispose();
         }else if(txtUsuario.getText().equals("Jaime")){
             Principal frm=new Principal();
