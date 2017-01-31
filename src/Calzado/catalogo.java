@@ -2503,7 +2503,11 @@ public class catalogo extends javax.swing.JFrame {
         Double manipulacion=Double.parseDouble(txtTotalMan.getText());
         Double costura=Double.parseDouble(txtTotalCos.getText());
         Double inyeccion=Double.parseDouble(txtTotalIny.getText());
-        Double gastos=Double.parseDouble(txtGastosInd.getText());
+        Double salarioInyeccion=Double.parseDouble(txtTotalIny.getText());
+        Double subTotal=Double.parseDouble(txtTotalIny.getText());
+        Double gastosIndirectos=Double.parseDouble(txtGastosInd.getText());
+        Double fabricacion=Double.parseDouble(txtTotalIny.getText());
+        Double porcentaje=Double.parseDouble(txtUtilidad.getText());
         Double utilidad=Double.parseDouble(txtUtilidad.getText());
         Double merma=Double.parseDouble(txtMerma.getText());
         Double total=Double.parseDouble(txtTotal.getText());
@@ -2513,7 +2517,7 @@ public class catalogo extends javax.swing.JFrame {
         
         try {
             PreparedStatement ps;
-            ps = cn.prepareStatement("insert into calzado(linea,modelo,articulo,color,activo,manipulacion,costura,inyeccion,gastos,utilidad,merma,total,imagen) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            ps = cn.prepareStatement("insert into calzado(linea,modelo,articulo,color,activo,manipulacion,costura,inyeccion,salarioInyeccion,subTotal,gastosIndirectos,fabricacion,porcentaje,utilidad,merma,total,imagen) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1,linea);
             ps.setString(2,modelo);
             ps.setString(3,articulo);
@@ -2522,11 +2526,15 @@ public class catalogo extends javax.swing.JFrame {
             ps.setDouble(6,manipulacion);
             ps.setDouble(7,costura);
             ps.setDouble(8,inyeccion);
-            ps.setDouble(9,gastos);
-            ps.setDouble(10,utilidad);
-            ps.setDouble(11,merma);
-            ps.setDouble(12,total);
-            ps.setBlob(13, bais);
+            ps.setDouble(9,salarioInyeccion);
+            ps.setDouble(10,subTotal);
+            ps.setDouble(11,gastosIndirectos);
+            ps.setDouble(12,fabricacion);
+            ps.setDouble(13,porcentaje);
+            ps.setDouble(14,utilidad);
+            ps.setDouble(15,merma);
+            ps.setDouble(16,total);
+            ps.setBlob(17, bais);
             ps.execute();
             ps.close();
             JOptionPane.showMessageDialog(null, "El calzado se ha integrado correctamente a la base de datos");
