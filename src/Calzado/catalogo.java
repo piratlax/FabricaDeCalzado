@@ -1620,15 +1620,17 @@ public class catalogo extends javax.swing.JFrame {
             completar = cn.createStatement();
             ResultSet rs = completar.executeQuery(sql);
             while (rs.next()) {
-               txtSalariosInyeccion.setText(rs.getString("linea"));
-               modelo=rs.getString("modelo");
-               articulo=rs.getString("articulo");
-               combinacion=rs.getString("color");
+               txtSalariosInyeccion.setText(rs.getString("salarioInyeccion"));
+               txtGastosInd.setText(rs.getString("gastosIndirectos"));
+               txtPorcentaje.setText(rs.getString("porcentaje"));
+               txtGastosInd.setText(rs.getString("gastosIndirectos"));
+               txtMerma.setText(rs.getString("merma"));
+               
             }
     }catch (SQLException ex) {
             System.out.println("Sin poder ejecutar el query a la tabla");
         }
-
+    }
     /// Calculamos el valor total del especificacion
     public void calculoTotal() {
         //asignamos variables
@@ -2471,8 +2473,10 @@ public class catalogo extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         //recalculamos el zapato antes de que se grabe
         btnCalcular.doClick();
-
-        //iniciamos el proceso de guardar la creacion del Calzado
+        
+        //dependiendo el texto del boton hacemos las acciones
+        if (btnGuardar.getText().equals("GUARDAR")){
+       //iniciamos el proceso de guardar la creacion del Calzado
        
        // pasamos la imagen de icono de label a formato imagen
        imagenes img=new imagenes();
@@ -2503,11 +2507,11 @@ public class catalogo extends javax.swing.JFrame {
         Double manipulacion=Double.parseDouble(txtTotalMan.getText());
         Double costura=Double.parseDouble(txtTotalCos.getText());
         Double inyeccion=Double.parseDouble(txtTotalIny.getText());
-        Double salarioInyeccion=Double.parseDouble(txtTotalIny.getText());
-        Double subTotal=Double.parseDouble(txtTotalIny.getText());
+        Double salarioInyeccion=Double.parseDouble(txtSalariosInyeccion.getText());
+        Double subTotal=Double.parseDouble(txtSubTotal.getText());
         Double gastosIndirectos=Double.parseDouble(txtGastosInd.getText());
-        Double fabricacion=Double.parseDouble(txtTotalIny.getText());
-        Double porcentaje=Double.parseDouble(txtUtilidad.getText());
+        Double fabricacion=Double.parseDouble(txtCostoFabricacion.getText());
+        Double porcentaje=Double.parseDouble(txtPorcentaje.getText());
         Double utilidad=Double.parseDouble(txtUtilidad.getText());
         Double merma=Double.parseDouble(txtMerma.getText());
         Double total=Double.parseDouble(txtTotal.getText());
@@ -2517,7 +2521,7 @@ public class catalogo extends javax.swing.JFrame {
         
         try {
             PreparedStatement ps;
-            ps = cn.prepareStatement("insert into calzado(linea,modelo,articulo,color,activo,manipulacion,costura,inyeccion,salarioInyeccion,subTotal,gastosIndirectos,fabricacion,porcentaje,utilidad,merma,total,imagen) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            ps = cn.prepareStatement("insert into calzado(linea,modelo,articulo,color,activo,manipulacion,costura,inyeccion,salarioInyeccion,subTotal,gastosIndirectos,fabricacion,porcentaje,utilidad,merma,total,imagen) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1,linea);
             ps.setString(2,modelo);
             ps.setString(3,articulo);
@@ -2639,8 +2643,117 @@ public class catalogo extends javax.swing.JFrame {
         }
             
     */
+        }else{
+            //proceso si es que solo se va a actualizar
+          // pasamos la imagen de icono de label a formato imagen
+       imagenes img=new imagenes();
+       Image imagenCalzado=img.iconToImage(imgCalzado.getIcon());
+        BufferedImage bi = new BufferedImage(imagenCalzado.getWidth(null), imagenCalzado.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = bi.createGraphics();
+        g2d.drawImage(imagenCalzado, 0, 0, null);
+        g2d.dispose(); 
+        
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(bi, "jpg", baos );
+        } catch (IOException ex) {
+            Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        byte[] imageInByte = baos.toByteArray();
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        
+        //creamos las variables a integrar a la bd
+        String linea=txtLinea.getText();
+        String modelo=txtModelo.getText();
+        String articulo=txtArticulo.getText();
+        String color=txtColor.getText();
+        int activo=1;
+        if (!chkActivo.isSelected()){
+            activo=0;
+        }
+        Double manipulacion=Double.parseDouble(txtTotalMan.getText());
+        Double costura=Double.parseDouble(txtTotalCos.getText());
+        Double inyeccion=Double.parseDouble(txtTotalIny.getText());
+        Double salarioInyeccion=Double.parseDouble(txtSalariosInyeccion.getText());
+        Double subTotal=Double.parseDouble(txtSubTotal.getText());
+        Double gastosIndirectos=Double.parseDouble(txtGastosInd.getText());
+        Double fabricacion=Double.parseDouble(txtCostoFabricacion.getText());
+        Double porcentaje=Double.parseDouble(txtPorcentaje.getText());
+        Double utilidad=Double.parseDouble(txtUtilidad.getText());
+        Double merma=Double.parseDouble(txtMerma.getText());
+        Double total=Double.parseDouble(txtTotal.getText());
+        
+        
+        // pasamos toda la informacion a la base de datos calzado
+        
+        try {
+            PreparedStatement ps;
+            ps = cn.prepareStatement("insert into calzado(linea,modelo,articulo,color,activo,manipulacion,costura,inyeccion,salarioInyeccion,subTotal,gastosIndirectos,fabricacion,porcentaje,utilidad,merma,total,imagen) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            ps.setString(1,linea);
+            ps.setString(2,modelo);
+            ps.setString(3,articulo);
+            ps.setString(4,color);
+            ps.setInt(5,activo);
+            ps.setDouble(6,manipulacion);
+            ps.setDouble(7,costura);
+            ps.setDouble(8,inyeccion);
+            ps.setDouble(9,salarioInyeccion);
+            ps.setDouble(10,subTotal);
+            ps.setDouble(11,gastosIndirectos);
+            ps.setDouble(12,fabricacion);
+            ps.setDouble(13,porcentaje);
+            ps.setDouble(14,utilidad);
+            ps.setDouble(15,merma);
+            ps.setDouble(16,total);
+            ps.setBlob(17, bais);
+            ps.execute();
+            ps.close();
+            JOptionPane.showMessageDialog(null, "El calzado se ha integrado correctamente a la base de datos");
+            //ya que se grabo en la base de datos pasamos a dejar todo de nuevo para un nuevo calzado
+            btnCrear.setEnabled(true);
+            btnEditar.setEnabled(true);
+            btnGuardar.setEnabled(false);
+            btnIntegrar.setEnabled(false);
+            btnIntegrarCostura.setEnabled(false);
+            btnIntegrarInyeccion.setEnabled(false);
+            txtLinea.setText("");
+            txtLinea.setEnabled(true);
+            txtModelo.setText("");
+            txtModelo.setEnabled(true);
+            txtArticulo.setEnabled(true);
+            txtArticulo.setText("");
+            txtColor.setText("");
+            txtColor.setEnabled(true);
+            btnImagen.setEnabled(false);
+            mostrarTabla();
+            mostrarTablaCost();
+            mostrarTablaIny();
+            txtTotalMan.setText("0.00");
+            txtTotalCos.setText("0.00");
+            txtTotalIny.setText("0.00");
+            txtSalariosInyeccion.setText("0.00");
+            txtSubTotal.setText("0.00");
+            txtGastosInd.setText("0.00");
+            txtCostoFabricacion.setText("0.00");
+            txtUtilidad.setText("20");
+            txtMerma.setText("0.00");
+            txtTotal.setText("0.00");
+            txtSubManipulacion.setText("0.00");
+            txtSubManipulacion1.setText("0.00");
+            txtSubManipulacion2.setText("0.00");
+            
+            // creamos la imagen de default del calzado
+            ImageIcon imagenDefault = new ImageIcon(getClass().getResource("/Graficos/imgCalzado.png"));
+            imgCalzado.setIcon(imagenDefault);
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Hay un problema con la BD, Calzado no se ha grabado");
+        }
+         
+            
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
-
+    
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         // borrando un elemento de la tabla manipulacion
          int fila = tablaMan.getSelectedRow();
@@ -2741,6 +2854,10 @@ public class catalogo extends javax.swing.JFrame {
         String articulo=null;
         String combinacion=null;
        //Iniciamos el proceso de editar un calzado
+       // activamos boton de imagen
+       btnImagen.setEnabled(true);
+       //y cargamos la imagen
+       
        // empezamos con la ventana de dialogo de informacion a editar
        String articuloBuscar=txtArticulo.getText();
        
@@ -2788,13 +2905,14 @@ public class catalogo extends javax.swing.JFrame {
                    txtColor.setText(combinacion);
                    txtColor.setEnabled(false);
                    
+                   //y recuperamos los valores del total
+                   mostrarTotales();
                    //ahora solo llenamos las tablas
                    mostrarTabla();
                    mostrarTablaCost();
                    mostrarTablaIny();
                    
-                   //y recuperamos los valores del total
-                   mostrarTotales();
+                   
                }else{
                    //como no se decidio en editarlo borramos el texto
                    txtArticulo.setText("");
