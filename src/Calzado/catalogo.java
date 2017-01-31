@@ -2618,34 +2618,12 @@ public class catalogo extends javax.swing.JFrame {
             
             
          /*   
-        // ahora vamos a leer la imagen desde la base de datos
-            Statement st;
-        try {
-            st = cn.createStatement();
-            String sql = "select img from prueba where  idprueba=2";
-            
-
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                Blob blob = rs.getBlob("img");
-
-                int blobLength = (int) blob.length();
-
-                byte[] blobAsBytes = blob.getBytes(1, blobLength);
-                final BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(blobAsBytes));
-
-                txtPrueba.setIcon(new ImageIcon(bufferedImage));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
             
     */
         }else{
-            //proceso si es que solo se va a actualizar
-          // pasamos la imagen de icono de label a formato imagen
+        //proceso si es que solo se va a actualizar
+        // pasamos la imagen de icono de label a formato imagen
        imagenes img=new imagenes();
        Image imagenCalzado=img.iconToImage(imgCalzado.getIcon());
         BufferedImage bi = new BufferedImage(imagenCalzado.getWidth(null), imagenCalzado.getHeight(null), BufferedImage.TYPE_INT_ARGB);
@@ -2688,27 +2666,25 @@ public class catalogo extends javax.swing.JFrame {
         
         try {
             PreparedStatement ps;
-            ps = cn.prepareStatement("insert into calzado(linea,modelo,articulo,color,activo,manipulacion,costura,inyeccion,salarioInyeccion,subTotal,gastosIndirectos,fabricacion,porcentaje,utilidad,merma,total,imagen) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            ps.setString(1,linea);
-            ps.setString(2,modelo);
-            ps.setString(3,articulo);
-            ps.setString(4,color);
-            ps.setInt(5,activo);
-            ps.setDouble(6,manipulacion);
-            ps.setDouble(7,costura);
-            ps.setDouble(8,inyeccion);
-            ps.setDouble(9,salarioInyeccion);
-            ps.setDouble(10,subTotal);
-            ps.setDouble(11,gastosIndirectos);
-            ps.setDouble(12,fabricacion);
-            ps.setDouble(13,porcentaje);
-            ps.setDouble(14,utilidad);
-            ps.setDouble(15,merma);
-            ps.setDouble(16,total);
-            ps.setBlob(17, bais);
-            ps.execute();
+            ps = cn.prepareStatement("update calzado set activo=?,manipulacion=?,costura=?,inyeccion=?,salarioInyeccion=?,"
+                    + "subTotal=?,gastosIndirectos=?,fabricacion=?,porcentaje=?,utilidad=?,merma=?,total=?,imagen=?) WHERE articulo='"+txtArticulo.getText()+"'");
+            
+            ps.setInt(1,activo);
+            ps.setDouble(2,manipulacion);
+            ps.setDouble(3,costura);
+            ps.setDouble(4,inyeccion);
+            ps.setDouble(5,salarioInyeccion);
+            ps.setDouble(6,subTotal);
+            ps.setDouble(7,gastosIndirectos);
+            ps.setDouble(8,fabricacion);
+            ps.setDouble(9,porcentaje);
+            ps.setDouble(10,utilidad);
+            ps.setDouble(11,merma);
+            ps.setDouble(12,total);
+            ps.setBlob(13, bais);
+            ps.executeUpdate();
             ps.close();
-            JOptionPane.showMessageDialog(null, "El calzado se ha integrado correctamente a la base de datos");
+            JOptionPane.showMessageDialog(null, "El calzado se ha actualizado correctamente a la base de datos");
             //ya que se grabo en la base de datos pasamos a dejar todo de nuevo para un nuevo calzado
             btnCrear.setEnabled(true);
             btnEditar.setEnabled(true);
@@ -2853,10 +2829,7 @@ public class catalogo extends javax.swing.JFrame {
         String modelo=null;
         String articulo=null;
         String combinacion=null;
-       //Iniciamos el proceso de editar un calzado
-       // activamos boton de imagen
-       btnImagen.setEnabled(true);
-       //y cargamos la imagen
+      
        
        // empezamos con la ventana de dialogo de informacion a editar
        String articuloBuscar=txtArticulo.getText();
@@ -2886,11 +2859,42 @@ public class catalogo extends javax.swing.JFrame {
                        + "Continua?", "Atencion",0,1);
                if (respuesta==0){
                    //procedemos a la edicion del zapato
+                    //Iniciamos el proceso de editar un calzado
+       // activamos boton de imagen
+       btnImagen.setEnabled(true);
+       //y cargamos la imagen
+       
+            Statement st;
+        try {
+            st = cn.createStatement();
+            String img = "select * from calzado where  articulo='"+txtArticulo.getText()+"'";
+            System.out.println (sql);
+
+            ResultSet rsImg = st.executeQuery(img);
+            while (rsImg.next()) {
+                Blob blob = rsImg.getBlob("imagen");
+
+                int blobLength = (int) blob.length();
+
+                byte[] blobAsBytes = blob.getBytes(1, blobLength);
+                final BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(blobAsBytes));
+
+                imgCalzado.setIcon(new ImageIcon(bufferedImage));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                   
                    //lo primero cambiamos el texto del boton guardar
                    // y inhabilitamos el boton de crear
                    btnGuardar.setEnabled(true);
                    btnGuardar.setText("Actualizar");
                    btnCrear.setEnabled(false);
+                   
+                   //activamos el boton de integrar
+                   btnIntegrar.setEnabled(true);
                    
                    //cambiamos el boton de editar por el de cancelar
                    btnEditar.setText("Anular");
