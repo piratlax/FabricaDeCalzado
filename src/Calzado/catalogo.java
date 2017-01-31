@@ -2,6 +2,7 @@ package Calzado;
 
 import Logica.conexion;
 import Logica.imagenes;
+import Logica.fncCatalogo;
 import com.mxrck.autocompleter.TextAutoCompleter;
 import inventarios.frmInventario;
 import java.awt.Graphics2D;
@@ -51,6 +52,7 @@ public class catalogo extends javax.swing.JFrame {
         asignarAutocompletadoMaquila1();
         asignarAutocompletado2();
         asignarAutocompletadoMaquila2();
+        asignarAutocompletadoArticulo();
         btnIntegrar.setEnabled(false);
         btnIntegrarCostura.setEnabled(false);
         btnIntegrarInyeccion.setEnabled(false);
@@ -204,6 +206,29 @@ public class catalogo extends javax.swing.JFrame {
         }
 
     }
+    
+
+    public void asignarAutocompletadoArticulo() {
+        TextAutoCompleter textAutoCompleter = new TextAutoCompleter(txtArticulo);
+        textAutoCompleter.setMode(0); // infijo
+        textAutoCompleter.setCaseSensitive(false); //No sensible a mayúsculas
+
+        //iniciamos
+        try {
+            String sql = "SELECT * FROM calzado";
+            Statement completar;
+            completar = cn.createStatement();
+            ResultSet rs = completar.executeQuery(sql);
+            while (rs.next()) {
+                textAutoCompleter.addItem(rs.getString("articulo"));
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Sin poder ejecutar el query a la tabla2");
+        }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -340,6 +365,11 @@ public class catalogo extends javax.swing.JFrame {
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Graficos/editar.png"))); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Graficos/nuevo.png"))); // NOI18N
         btnCrear.setText("Crear");
@@ -371,27 +401,23 @@ public class catalogo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCrear)
-                    .addComponent(btnEditar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCrear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnCrear)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(btnCrear))
+                .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLinea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -975,7 +1001,7 @@ public class catalogo extends javax.swing.JFrame {
 
         jLabel26.setText("SubTotal");
 
-        jPanel10.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanel10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel23.setText("Salarios para Inyeccion");
 
@@ -1094,7 +1120,7 @@ public class catalogo extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jPanel11.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanel11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel34.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1186,11 +1212,12 @@ public class catalogo extends javax.swing.JFrame {
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGap(77, 77, 77)
-                                .addComponent(btnCalcular))
-                            .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPrueba, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(txtPrueba, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(btnCalcular)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBorrar3)
@@ -1207,18 +1234,17 @@ public class catalogo extends javax.swing.JFrame {
             .addGap(0, 861, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
+            .addGap(0, 522, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         panel.addTab("Total", jPanel5);
@@ -1275,7 +1301,7 @@ public class catalogo extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnImagen)
@@ -1285,8 +1311,7 @@ public class catalogo extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -1403,7 +1428,7 @@ public class catalogo extends javax.swing.JFrame {
 
                             stmt.close();
                             txtSubManipulacion.setText("0.00");
-                            mostrarTabla("manipulacion");
+                            mostrarTabla();
                         } catch (SQLException ex) {
                             Logger.getLogger(frmInventario.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -1510,7 +1535,7 @@ public class catalogo extends javax.swing.JFrame {
                             txtSubManipulacion.setText("0.00");
                             txtPrecio1.setText("");
                             txtMaquila.setText("");
-                            mostrarTabla("manipulacion");
+                            mostrarTabla();
                         } catch (SQLException ex) {
                             Logger.getLogger(frmInventario.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -1532,8 +1557,8 @@ public class catalogo extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnIntegrarActionPerformed
 
-    public void mostrarTabla(String parametro) {
-        String sql = "SELECT * FROM especificacion where modelo='" + txtModelo.getText() + "' AND proceso='" + parametro + "' AND articulo='"
+    public void mostrarTabla() {
+        String sql = "SELECT * FROM especificacion where modelo='" + txtModelo.getText() + "' AND proceso='manipulacion' AND articulo='"
                 + txtArticulo.getText() + "'";
         String[] cabecera = {"Codigo", "Pieza", "Nombre", "Medida", "Consumo", "Precio", "total"};
         // se definen los registros que llevara la tabla
@@ -1586,6 +1611,23 @@ public class catalogo extends javax.swing.JFrame {
         }
 
     }
+    
+    public void mostrarTotales(){
+        //iniciamos
+        try {
+            String sql = "SELECT * FROM calzado WHERE articulo='"+txtArticulo.getText()+"'";
+            Statement completar;
+            completar = cn.createStatement();
+            ResultSet rs = completar.executeQuery(sql);
+            while (rs.next()) {
+               txtSalariosInyeccion.setText(rs.getString("linea"));
+               modelo=rs.getString("modelo");
+               articulo=rs.getString("articulo");
+               combinacion=rs.getString("color");
+            }
+    }catch (SQLException ex) {
+            System.out.println("Sin poder ejecutar el query a la tabla");
+        }
 
     /// Calculamos el valor total del especificacion
     public void calculoTotal() {
@@ -2504,7 +2546,7 @@ public class catalogo extends javax.swing.JFrame {
             txtColor.setText("");
             txtColor.setEnabled(true);
             btnImagen.setEnabled(false);
-            mostrarTabla("manipulacion");
+            mostrarTabla();
             mostrarTablaCost();
             mostrarTablaIny();
             txtTotalMan.setText("0.00");
@@ -2609,12 +2651,12 @@ public class catalogo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Elemento Eliminado");
             txtSubManipulacion.setText("0.00");
             txtTotalMan.setText("0.00");
-            mostrarTabla("manipulacion");
+            mostrarTabla();
             btnCalcular.doClick();
         }
         catch (HeadlessException | SQLException ex){
           JOptionPane.showMessageDialog(null,"no se elimino el elemento");
-          mostrarTabla("manipulacion");
+          mostrarTabla();
         }
        }   
     }//GEN-LAST:event_btnBorrarActionPerformed
@@ -2676,7 +2718,94 @@ public class catalogo extends javax.swing.JFrame {
         }
        }   
     }//GEN-LAST:event_btnBorrar2ActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        //si el boton esta en modo "cancelar", reiniciamos
+        if (btnEditar.getText().equals("Anular")){
+            catalogo frm=new catalogo();
+            frm.setVisible(true);
+            this.dispose();
+        }else{
+
+        //asignamos valores
+        String linea=null;
+        String modelo=null;
+        String articulo=null;
+        String combinacion=null;
+       //Iniciamos el proceso de editar un calzado
+       // empezamos con la ventana de dialogo de informacion a editar
+       String articuloBuscar=txtArticulo.getText();
+       
+       fncCatalogo metodo=new fncCatalogo();
+       //verificamos si se puede editar
+       if (metodo.existe(txtArticulo.getText())){
+        
+        //buscamos los datos del calzado
+       //iniciamos
+        try {
+            String sql = "SELECT * FROM calzado WHERE articulo='"+articuloBuscar+"'";
+            Statement completar;
+            completar = cn.createStatement();
+            ResultSet rs = completar.executeQuery(sql);
+            while (rs.next()) {
+               linea=rs.getString("linea");
+               modelo=rs.getString("modelo");
+               articulo=rs.getString("articulo");
+               combinacion=rs.getString("color");
+            }
+               int respuesta=JOptionPane.showConfirmDialog(this, "se va a editar el siguiente calzado\n"
+                       + "Linea: "+linea+"\n"
+                       + "Modelo: "+modelo+"\n"
+                       + "Articulo: "+articulo+"\n"
+                       + "Combinacion: "+combinacion+"\n"
+                       + "Continua?", "Atencion",0,1);
+               if (respuesta==0){
+                   //procedemos a la edicion del zapato
+                   //lo primero cambiamos el texto del boton guardar
+                   // y inhabilitamos el boton de crear
+                   btnGuardar.setEnabled(true);
+                   btnGuardar.setText("Actualizar");
+                   btnCrear.setEnabled(false);
+                   
+                   //cambiamos el boton de editar por el de cancelar
+                   btnEditar.setText("Anular");
+                   
+                   //llenamos los datos del calzado y los inhabilitamos
+                   txtLinea.setText(linea);
+                   txtLinea.setEnabled(false);
+                   txtModelo.setText(modelo);
+                   txtModelo.setEnabled(false);
+                   txtArticulo.setText(articulo);
+                   txtArticulo.setEnabled(false);
+                   txtColor.setText(combinacion);
+                   txtColor.setEnabled(false);
+                   
+                   //ahora solo llenamos las tablas
+                   mostrarTabla();
+                   mostrarTablaCost();
+                   mostrarTablaIny();
+                   
+                   //y recuperamos los valores del total
+                   mostrarTotales();
+               }else{
+                   //como no se decidio en editarlo borramos el texto
+                   txtArticulo.setText("");
+               }
+        
+            
+
+        } catch (SQLException ex) {
+            System.out.println("Sin poder ejecutar el query a la tabla1");
+                }
+        
+        
+       }else{
+           // no hay nada que editar
+           System.out.println ("No se encuentra");
+       }
     
+    }//GEN-LAST:event_btnEditarActionPerformed
+    }
     /**
      * @param args the command line arguments
      */
