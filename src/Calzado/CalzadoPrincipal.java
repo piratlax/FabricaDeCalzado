@@ -76,6 +76,11 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem4);
 
         mnuEliminarCalzado.setText("Eliminar Modelo");
+        mnuEliminarCalzado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuEliminarCalzadoActionPerformed(evt);
+            }
+        });
         jMenu2.add(mnuEliminarCalzado);
 
         jMenuBar1.add(jMenu2);
@@ -107,7 +112,7 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+        // iniciamos la duplicacion de modelo
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void mnuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSalirActionPerformed
@@ -119,6 +124,10 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
        frm.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void mnuEliminarCalzadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuEliminarCalzadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuEliminarCalzadoActionPerformed
 
     /**
      * @param args the command line arguments
