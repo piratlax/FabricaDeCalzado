@@ -2428,7 +2428,8 @@ public class catalogo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActMaquila2ActionPerformed
 
     private void btnNuevaMaquila2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaMaquila2ActionPerformed
-        // TODO add your handling code here:
+        maquila frm=new maquila();
+        frm.setVisible(true);
     }//GEN-LAST:event_btnNuevaMaquila2ActionPerformed
 
     private void btnActInventario2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActInventario2ActionPerformed
@@ -2574,6 +2575,7 @@ public class catalogo extends javax.swing.JFrame {
             txtSubManipulacion.setText("0.00");
             txtSubManipulacion1.setText("0.00");
             txtSubManipulacion2.setText("0.00");
+            asignarAutocompletadoArticulo();
             
             // creamos la imagen de default del calzado
             ImageIcon imagenDefault = new ImageIcon(getClass().getResource("/Graficos/imgCalzado.png"));
@@ -2583,44 +2585,7 @@ public class catalogo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Hay un problema con la BD, Calzado no se ha grabado");
         }
         
-            
-            
-            
-            
-         /*   
-        // ahora vamos a leer la imagen desde la base de datos
-            Statement st;
-        try {
-            st = cn.createStatement();
-            String sql = "select img from prueba where  idprueba=2";
-            
-
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                Blob blob = rs.getBlob("img");
-
-                int blobLength = (int) blob.length();
-
-                byte[] blobAsBytes = blob.getBytes(1, blobLength);
-                final BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(blobAsBytes));
-
-                txtPrueba.setIcon(new ImageIcon(bufferedImage));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-        
-            
-            
-            
-            
-         /*   
-        
-            
-    */
+         
         }else{
         //proceso si es que solo se va a actualizar
         // pasamos la imagen de icono de label a formato imagen
@@ -2663,11 +2628,12 @@ public class catalogo extends javax.swing.JFrame {
         
         
         // pasamos toda la informacion a la base de datos calzado
+        String actualizar="update calzado set activo=?,manipulacion=?,costura=?,inyeccion=?,salarioInyeccion=?,"
+                    + "subTotal=?,gastosIndirectos=?,fabricacion=?,porcentaje=?,utilidad=?,merma=?,total=?,imagen=? WHERE articulo='"+txtArticulo.getText()+"'";
         
         try {
             PreparedStatement ps;
-            ps = cn.prepareStatement("update calzado set activo=?,manipulacion=?,costura=?,inyeccion=?,salarioInyeccion=?,"
-                    + "subTotal=?,gastosIndirectos=?,fabricacion=?,porcentaje=?,utilidad=?,merma=?,total=?,imagen=?) WHERE articulo='"+txtArticulo.getText()+"'");
+            ps = cn.prepareStatement(actualizar);
             
             ps.setInt(1,activo);
             ps.setDouble(2,manipulacion);
@@ -2717,6 +2683,9 @@ public class catalogo extends javax.swing.JFrame {
             txtSubManipulacion.setText("0.00");
             txtSubManipulacion1.setText("0.00");
             txtSubManipulacion2.setText("0.00");
+            btnEditar.setText("Editar");
+            txtSubManipulacion2.setText("0.00");
+            asignarAutocompletadoArticulo();
             
             // creamos la imagen de default del calzado
             ImageIcon imagenDefault = new ImageIcon(getClass().getResource("/Graficos/imgCalzado.png"));
@@ -2893,8 +2862,10 @@ public class catalogo extends javax.swing.JFrame {
                    btnGuardar.setText("Actualizar");
                    btnCrear.setEnabled(false);
                    
-                   //activamos el boton de integrar
+                   //activamos los botones de integrar
                    btnIntegrar.setEnabled(true);
+                   btnIntegrarCostura.setEnabled(true);
+                   btnIntegrarInyeccion.setEnabled(true);
                    
                    //cambiamos el boton de editar por el de cancelar
                    btnEditar.setText("Anular");

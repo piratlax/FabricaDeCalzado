@@ -35,6 +35,7 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        mnuEliminarCalzado = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -58,7 +59,7 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Calzado");
 
-        jMenuItem3.setText("Crear Calzado");
+        jMenuItem3.setText("Crear Modelo");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -73,6 +74,9 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem4);
+
+        mnuEliminarCalzado.setText("Eliminar Modelo");
+        jMenu2.add(mnuEliminarCalzado);
 
         jMenuBar1.add(jMenu2);
 
@@ -161,6 +165,7 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem mnuEliminarCalzado;
     private javax.swing.JMenuItem mnuSalir;
     // End of variables declaration//GEN-END:variables
 }

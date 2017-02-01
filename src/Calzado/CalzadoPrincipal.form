@@ -31,7 +31,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Crear Calzado"/>
+                <Property name="text" type="java.lang.String" value="Crear Modelo"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
@@ -44,6 +44,11 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
               </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuEliminarCalzado">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Eliminar Modelo"/>
+              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
