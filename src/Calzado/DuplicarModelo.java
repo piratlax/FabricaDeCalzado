@@ -4,6 +4,7 @@ import Logica.conexion;
 import Logica.fncCatalogo;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -39,7 +40,7 @@ public class DuplicarModelo extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JLabel();
+        txtModelo = new javax.swing.JLabel();
         txtLinea = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -47,16 +48,17 @@ public class DuplicarModelo extends javax.swing.JFrame {
         txtArticulo = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtClonLinea = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtClonArticulo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtClonModelo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        txtClonCombinacion = new javax.swing.JTextField();
+        btnClonar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Duplicar Modelo"));
 
@@ -75,20 +77,22 @@ public class DuplicarModelo extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(42, 42, 42)
-                .addComponent(txtArticuloBuscar)
-                .addGap(18, 18, 18)
-                .addComponent(btnBuscar)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtArticuloBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscar)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtArticuloBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
                     .addComponent(btnBuscar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -97,10 +101,10 @@ public class DuplicarModelo extends javax.swing.JFrame {
 
         jLabel2.setText("Linea");
 
-        jLabel3.setText("Nombre");
+        jLabel3.setText("Modelo");
 
-        txtNombre.setBackground(new java.awt.Color(153, 153, 153));
-        txtNombre.setText(".");
+        txtModelo.setBackground(new java.awt.Color(153, 153, 153));
+        txtModelo.setText(".");
 
         txtLinea.setBackground(new java.awt.Color(153, 153, 153));
         txtLinea.setText(".");
@@ -130,15 +134,16 @@ public class DuplicarModelo extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(txtLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtModelo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(txtCombinacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(txtCombinacion, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -147,18 +152,20 @@ public class DuplicarModelo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtLinea)
+                    .addComponent(txtLinea))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtArticulo))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNombre))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtCombinacion))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtModelo))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Nuevo Calzado"));
@@ -167,11 +174,9 @@ public class DuplicarModelo extends javax.swing.JFrame {
 
         jLabel7.setText("Articulo");
 
-        jLabel8.setText("Nombre");
+        jLabel8.setText("Modelo");
 
         jLabel9.setText("Combinacion");
-
-        jButton2.setText("Clonar");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -180,26 +185,24 @@ public class DuplicarModelo extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(31, 31, 31)
+                        .addComponent(txtClonLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtClonArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
+                            .addComponent(jLabel9)
                             .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                            .addComponent(jTextField4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField3))
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField5)))
-                .addContainerGap())
+                            .addComponent(txtClonCombinacion, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                            .addComponent(txtClonModelo))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,44 +210,61 @@ public class DuplicarModelo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtClonLinea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel8)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jLabel7)
+                        .addComponent(txtClonArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtClonModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(txtClonCombinacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        btnClonar.setText("Clonar");
+        btnClonar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClonarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnClonar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnClonar)
+                        .addGap(65, 65, 65))))
         );
 
         pack();
@@ -260,7 +280,7 @@ public class DuplicarModelo extends javax.swing.JFrame {
         String articulo = null;
         String combinacion = null;
         fncCatalogo metodo = new fncCatalogo();
-        //verificamos si se puede editar
+        
         if (metodo.existe(txtArticuloBuscar.getText())) {
             //buscamos los datos del calzado
             //iniciamos
@@ -275,19 +295,114 @@ public class DuplicarModelo extends javax.swing.JFrame {
                     articulo = rs.getString("articulo");
                     combinacion = rs.getString("color");
                 }
-                int respuesta = JOptionPane.showConfirmDialog(this, "se va a editar el siguiente calzado\n"
-                        + "Linea: " + linea + "\n"
-                        + "Modelo: " + modelo + "\n"
-                        + "Articulo: " + articulo + "\n"
-                        + "Combinacion: " + combinacion + "\n"
-                        + "Continua?", "Atencion", 0, 1);
-                if (respuesta == 0) {
-                }
+                txtLinea.setText(linea);
+                txtModelo.setText(modelo);
+                txtArticulo.setText(articulo);
+                txtCombinacion.setText(combinacion);
             } catch (SQLException ex) {
                 Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }else{
+            JOptionPane.showMessageDialog(this, "El articulo no existe");
+            txtArticuloBuscar.setText("");
+            txtArticuloBuscar.requestFocus();
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnClonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClonarActionPerformed
+       // iniciamos el desmadre XD
+       //verificamos campos vacios
+       if (txtClonArticulo.getText().length()==0 ||
+           txtClonModelo.getText().length()==0 ||
+           txtClonCombinacion.getText().length()==0 ||
+           txtClonLinea.getText().length()==0){
+           JOptionPane.showMessageDialog(this, "Necesitas completar datos");
+       }else {
+           //iniciamos la clonacion
+           
+           // pasamos a mayusculas los campos
+           txtClonModelo.setText(txtClonModelo.getText().toUpperCase());
+           txtClonCombinacion.setText(txtClonCombinacion.getText().toUpperCase());
+           txtClonLinea.setText(txtClonLinea.getText().toUpperCase());
+           //clonamos los materiales
+           
+           String sql="SELECT * from especificacion WHERE articulo='"+txtArticulo.getText()+"'";
+           try{
+               Statement clonado;
+               clonado=cn.createStatement();
+               ResultSet rs=clonado.executeQuery(sql);
+               while(rs.next()){
+                   //aqui mientras tengo materiales se lo va a crear al nuevo calzado
+                   //ya teniendo todos los valores integramos la especificacion a la BD especificacion
+                        try {
+                            Statement stmt = cn.createStatement();
+                            String grabar = "INSERT INTO especificacion (modelo,codigo,linea,articulo,color,pieza,nombre,medida,consumo,precio,resultado,estado,proceso) "
+                                    + "VALUES ('"
+                                    + txtClonModelo.getText() + "','"
+                                    + rs.getString("codigo") + "','"
+                                    + txtClonLinea.getText() + "','"
+                                    + txtClonArticulo.getText() + "','"
+                                    + txtClonCombinacion.getText() + "','"
+                                    + rs.getString("pieza") + "','"
+                                    + rs.getString("nombre") + "','"
+                                    + rs.getString("medida") + "','"
+                                    + rs.getDouble("consumo") + "','"
+                                    + rs.getDouble("precio") + "','"
+                                    + rs.getDouble("resultado") + "','"
+                                    + rs.getString("estado") + "','"
+                                    + rs.getString("proceso") + "'";
+                            stmt.executeUpdate(grabar);
+
+                            stmt.close();
+               }catch (SQLException ex) {
+                Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+               }  
+           }
+       }catch (SQLException ex) {
+                Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+           // ya que se crearon las especificaciones pasamos al calzado :)
+           String calzado="SELECT * from calzado WHERE articulo='"+txtArticulo.getText()+"'";
+           try{
+               Statement clonado;
+               clonado=cn.createStatement();
+               ResultSet rs=clonado.executeQuery(calzado);
+               while(rs.next()){
+                   //aqui mientras tengo materiales se lo va a crear al nuevo calzado
+                   //ya teniendo todos los valores integramos la especificacion a la BD especificacion
+                        try {
+                        PreparedStatement ps;
+                        ps = cn.prepareStatement("insert into calzado(linea,modelo,articulo,color,activo,manipulacion,costura,inyeccion,salarioInyeccion,subTotal,gastosIndirectos,fabricacion,porcentaje,utilidad,merma,total,imagen) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                        ps.setString(1,txtClonLinea.getText());
+                        ps.setString(2,txtClonModelo.getText());
+                        ps.setString(3,txtClonArticulo.getText());
+                        ps.setString(4,txtClonCombinacion.getText());
+                        ps.setInt(5,rs.getInt("activo"));
+                        ps.setDouble(6,rs.getDouble("manipulacion"));
+                        ps.setDouble(7,rs.getDouble("costura"));
+                        ps.setDouble(8,rs.getDouble("inyeccion"));
+                        ps.setDouble(9,rs.getDouble("salarioInyeccion"));
+                        ps.setDouble(10,rs.getDouble("subTotal"));
+                        ps.setDouble(11,rs.getDouble("gastosIndirectos"));
+                        ps.setDouble(12,rs.getDouble("fabricacion"));
+                        ps.setDouble(13,rs.getDouble("porcentaje"));
+                        ps.setDouble(14,rs.getDouble("utilidad"));
+                        ps.setDouble(15,rs.getDouble("merma"));
+                        ps.setDouble(16,rs.getDouble("total"));
+                        ps.setBlob(17, rs.getBlob("imagen"));
+                        ps.execute();
+                        ps.close();
+      
+               }catch (SQLException ex) {
+                Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+               }  
+           }
+       }catch (SQLException ex) {
+                Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       }
+    }//GEN-LAST:event_btnClonarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -326,7 +441,7 @@ public class DuplicarModelo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnClonar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -339,14 +454,14 @@ public class DuplicarModelo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel txtArticulo;
     private javax.swing.JTextField txtArticuloBuscar;
+    private javax.swing.JTextField txtClonArticulo;
+    private javax.swing.JTextField txtClonCombinacion;
+    private javax.swing.JTextField txtClonLinea;
+    private javax.swing.JTextField txtClonModelo;
     private javax.swing.JLabel txtCombinacion;
     private javax.swing.JLabel txtLinea;
-    private javax.swing.JLabel txtNombre;
+    private javax.swing.JLabel txtModelo;
     // End of variables declaration//GEN-END:variables
 }
