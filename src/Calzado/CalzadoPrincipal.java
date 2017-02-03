@@ -16,6 +16,7 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
      */
     public CalzadoPrincipal() {
         initComponents();
+        this.setDefaultLookAndFeelDecorated(false);
         this.setLocationRelativeTo(null);
     }
 
@@ -34,13 +35,14 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
         mnuSalir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        mnuEliminarCalzado = new javax.swing.JMenuItem();
+        mnuDuplicar = new javax.swing.JMenuItem();
+        mnuEliminar = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setUndecorated(true);
 
         jMenu1.setText("Sistema");
 
@@ -67,21 +69,21 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
-        jMenuItem4.setText("Duplicar Modelo");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        mnuDuplicar.setText("Duplicar Modelo");
+        mnuDuplicar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                mnuDuplicarActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        jMenu2.add(mnuDuplicar);
 
-        mnuEliminarCalzado.setText("Eliminar Modelo");
-        mnuEliminarCalzado.addActionListener(new java.awt.event.ActionListener() {
+        mnuEliminar.setText("Eliminar Modelo");
+        mnuEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuEliminarCalzadoActionPerformed(evt);
+                mnuEliminarActionPerformed(evt);
             }
         });
-        jMenu2.add(mnuEliminarCalzado);
+        jMenu2.add(mnuEliminar);
 
         jMenuBar1.add(jMenu2);
 
@@ -111,10 +113,11 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void mnuDuplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuDuplicarActionPerformed
         DuplicarModelo frm=new DuplicarModelo();
         frm.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+        mnuDuplicar.setEnabled(false);
+    }//GEN-LAST:event_mnuDuplicarActionPerformed
 
     private void mnuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSalirActionPerformed
         System.exit(0);
@@ -126,9 +129,11 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void mnuEliminarCalzadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuEliminarCalzadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuEliminarCalzadoActionPerformed
+    private void mnuEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuEliminarActionPerformed
+        EliminarCalzado frm=new EliminarCalzado();
+        frm.setVisible(true);
+        mnuEliminar.setEnabled(false);
+    }//GEN-LAST:event_mnuEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,10 +177,10 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem mnuEliminarCalzado;
+    public static javax.swing.JMenuItem mnuDuplicar;
+    public static javax.swing.JMenuItem mnuEliminar;
     private javax.swing.JMenuItem mnuSalir;
     // End of variables declaration//GEN-END:variables
 }

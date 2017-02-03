@@ -355,6 +355,7 @@ public class catalogo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Creacion de Calzado");
+        setUndecorated(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Catalogo"));
 
@@ -1004,7 +1005,7 @@ public class catalogo extends javax.swing.JFrame {
 
         jLabel26.setText("SubTotal");
 
-        jPanel10.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanel10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel23.setText("Salarios para Inyeccion");
 
@@ -1123,7 +1124,7 @@ public class catalogo extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jPanel11.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanel11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel34.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

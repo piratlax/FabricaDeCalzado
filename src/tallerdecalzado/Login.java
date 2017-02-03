@@ -104,7 +104,9 @@ public class Login extends javax.swing.JFrame {
        // Acceso
         if (txtUsuario.getText().equals("Leonardo")){
             CalzadoPrincipal frm=new CalzadoPrincipal();
+           
             frm.setVisible(true);
+            frm.setDefaultLookAndFeelDecorated(false);
             this.dispose();
         }else if(txtUsuario.getText().equals("Jaime")){
             Principal frm=new Principal();

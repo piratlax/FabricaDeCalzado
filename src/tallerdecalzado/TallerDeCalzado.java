@@ -3,6 +3,7 @@ package tallerdecalzado;
 // creado por Mao Rivera
 // 24 de Enero del 2017
 
+import Calzado.CalzadoPrincipal;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -24,6 +25,7 @@ public class TallerDeCalzado {
             catch(Exception e){
             } 
              Splash.setDefaultLookAndFeelDecorated(false);
+             CalzadoPrincipal.setDefaultLookAndFeelDecorated(false);
             new Splash().setVisible(true);
         }
         });

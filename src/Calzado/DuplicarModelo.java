@@ -58,8 +58,9 @@ public class DuplicarModelo extends javax.swing.JFrame {
         btnClonar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setAlwaysOnTop(true);
+        setUndecorated(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Duplicar Modelo"));
 
@@ -332,7 +333,7 @@ public class DuplicarModelo extends javax.swing.JFrame {
                 || txtClonModelo.getText().length() == 0
                 || txtClonCombinacion.getText().length() == 0
                 || txtClonLinea.getText().length() == 0
-                || txtArticulo.getText().length()==0) {
+                || txtArticulo.getText().equals(".")) {
             JOptionPane.showMessageDialog(this, "Necesitas completar datos");
         } else {
             //iniciamos la clonacion
@@ -434,7 +435,8 @@ public class DuplicarModelo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClonarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       this.dispose();
+       CalzadoPrincipal.mnuDuplicar.setEnabled(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
