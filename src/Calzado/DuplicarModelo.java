@@ -56,6 +56,7 @@ public class DuplicarModelo extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtClonCombinacion = new javax.swing.JTextField();
         btnClonar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -232,6 +233,13 @@ public class DuplicarModelo extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -242,7 +250,9 @@ public class DuplicarModelo extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnClonar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnClonar, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -256,15 +266,17 @@ public class DuplicarModelo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
                         .addComponent(btnClonar)
-                        .addGap(65, 65, 65))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(21, 21, 21))))
         );
 
         pack();
@@ -280,7 +292,7 @@ public class DuplicarModelo extends javax.swing.JFrame {
         String articulo = null;
         String combinacion = null;
         fncCatalogo metodo = new fncCatalogo();
-        
+
         if (metodo.existe(txtArticuloBuscar.getText())) {
             //buscamos los datos del calzado
             //iniciamos
@@ -302,107 +314,128 @@ public class DuplicarModelo extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "El articulo no existe");
+            txtArticulo.setText("");
+            txtLinea.setText("");
+            txtModelo.setText("");
+            txtCombinacion.setText("");
             txtArticuloBuscar.setText("");
             txtArticuloBuscar.requestFocus();
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnClonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClonarActionPerformed
-       // iniciamos el desmadre XD
-       //verificamos campos vacios
-       if (txtClonArticulo.getText().length()==0 ||
-           txtClonModelo.getText().length()==0 ||
-           txtClonCombinacion.getText().length()==0 ||
-           txtClonLinea.getText().length()==0){
-           JOptionPane.showMessageDialog(this, "Necesitas completar datos");
-       }else {
-           //iniciamos la clonacion
-           
-           // pasamos a mayusculas los campos
-           txtClonModelo.setText(txtClonModelo.getText().toUpperCase());
-           txtClonCombinacion.setText(txtClonCombinacion.getText().toUpperCase());
-           txtClonLinea.setText(txtClonLinea.getText().toUpperCase());
-           //clonamos los materiales
-           
-           String sql="SELECT * from especificacion WHERE articulo='"+txtArticulo.getText()+"'";
-           try{
-               Statement clonado;
-               clonado=cn.createStatement();
-               ResultSet rs=clonado.executeQuery(sql);
-               while(rs.next()){
-                   //aqui mientras tengo materiales se lo va a crear al nuevo calzado
-                   //ya teniendo todos los valores integramos la especificacion a la BD especificacion
-                        try {
-                            Statement stmt = cn.createStatement();
-                            String grabar = "INSERT INTO especificacion (modelo,codigo,linea,articulo,color,pieza,nombre,medida,consumo,precio,resultado,estado,proceso) "
-                                    + "VALUES ('"
-                                    + txtClonModelo.getText() + "','"
-                                    + rs.getString("codigo") + "','"
-                                    + txtClonLinea.getText() + "','"
-                                    + txtClonArticulo.getText() + "','"
-                                    + txtClonCombinacion.getText() + "','"
-                                    + rs.getString("pieza") + "','"
-                                    + rs.getString("nombre") + "','"
-                                    + rs.getString("medida") + "','"
-                                    + rs.getDouble("consumo") + "','"
-                                    + rs.getDouble("precio") + "','"
-                                    + rs.getDouble("resultado") + "','"
-                                    + rs.getString("estado") + "','"
-                                    + rs.getString("proceso") + "'";
-                            stmt.executeUpdate(grabar);
+        // iniciamos el desmadre XD
+        //verificamos campos vacios
+        if (txtClonArticulo.getText().length() == 0
+                || txtClonModelo.getText().length() == 0
+                || txtClonCombinacion.getText().length() == 0
+                || txtClonLinea.getText().length() == 0
+                || txtArticulo.getText().length()==0) {
+            JOptionPane.showMessageDialog(this, "Necesitas completar datos");
+        } else {
+            //iniciamos la clonacion
 
-                            stmt.close();
-               }catch (SQLException ex) {
-                Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
-               }  
-           }
-       }catch (SQLException ex) {
+            // pasamos a mayusculas los campos
+            txtClonModelo.setText(txtClonModelo.getText().toUpperCase());
+            txtClonCombinacion.setText(txtClonCombinacion.getText().toUpperCase());
+            txtClonLinea.setText(txtClonLinea.getText().toUpperCase());
+            //clonamos los materiales
+
+            String sql = "SELECT * from especificacion WHERE articulo='" + txtArticulo.getText() + "'";
+            try {
+                Statement clonado;
+                clonado = cn.createStatement();
+                ResultSet rs = clonado.executeQuery(sql);
+                while (rs.next()) {
+                    //aqui mientras tengo materiales se lo va a crear al nuevo calzado
+                    //ya teniendo todos los valores integramos la especificacion a la BD especificacion
+                    try {
+                        Statement stmt = cn.createStatement();
+                        String grabar = "INSERT INTO especificacion (modelo,codigo,linea,articulo,color,pieza,nombre,medida,consumo,precio,resultado,estado,proceso) "
+                                + "VALUES ('"
+                                + txtClonModelo.getText() + "','"
+                                + rs.getString("codigo") + "','"
+                                + txtClonLinea.getText() + "','"
+                                + txtClonArticulo.getText() + "','"
+                                + txtClonCombinacion.getText() + "','"
+                                + rs.getString("pieza") + "','"
+                                + rs.getString("nombre") + "','"
+                                + rs.getString("medida") + "','"
+                                + rs.getDouble("consumo") + "','"
+                                + rs.getDouble("precio") + "','"
+                                + rs.getDouble("resultado") + "','"
+                                + rs.getString("estado") + "','"
+                                + rs.getString("proceso") + "')";
+                        stmt.executeUpdate(grabar);
+                        System.out.println(grabar);
+                        stmt.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } catch (SQLException ex) {
                 Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
             }
-           
-           // ya que se crearon las especificaciones pasamos al calzado :)
-           String calzado="SELECT * from calzado WHERE articulo='"+txtArticulo.getText()+"'";
-           try{
-               Statement clonado;
-               clonado=cn.createStatement();
-               ResultSet rs=clonado.executeQuery(calzado);
-               while(rs.next()){
-                   //aqui mientras tengo materiales se lo va a crear al nuevo calzado
-                   //ya teniendo todos los valores integramos la especificacion a la BD especificacion
-                        try {
+
+            // ya que se crearon las especificaciones pasamos al calzado :)
+            String calzado = "SELECT * from calzado WHERE articulo='" + txtArticulo.getText() + "'";
+            try {
+                Statement clonado;
+                clonado = cn.createStatement();
+                ResultSet rs = clonado.executeQuery(calzado);
+                while (rs.next()) {
+                    //aqui mientras tengo materiales se lo va a crear al nuevo calzado
+                    //ya teniendo todos los valores integramos la especificacion a la BD especificacion
+                    try {
                         PreparedStatement ps;
                         ps = cn.prepareStatement("insert into calzado(linea,modelo,articulo,color,activo,manipulacion,costura,inyeccion,salarioInyeccion,subTotal,gastosIndirectos,fabricacion,porcentaje,utilidad,merma,total,imagen) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-                        ps.setString(1,txtClonLinea.getText());
-                        ps.setString(2,txtClonModelo.getText());
-                        ps.setString(3,txtClonArticulo.getText());
-                        ps.setString(4,txtClonCombinacion.getText());
-                        ps.setInt(5,rs.getInt("activo"));
-                        ps.setDouble(6,rs.getDouble("manipulacion"));
-                        ps.setDouble(7,rs.getDouble("costura"));
-                        ps.setDouble(8,rs.getDouble("inyeccion"));
-                        ps.setDouble(9,rs.getDouble("salarioInyeccion"));
-                        ps.setDouble(10,rs.getDouble("subTotal"));
-                        ps.setDouble(11,rs.getDouble("gastosIndirectos"));
-                        ps.setDouble(12,rs.getDouble("fabricacion"));
-                        ps.setDouble(13,rs.getDouble("porcentaje"));
-                        ps.setDouble(14,rs.getDouble("utilidad"));
-                        ps.setDouble(15,rs.getDouble("merma"));
-                        ps.setDouble(16,rs.getDouble("total"));
+                        ps.setString(1, txtClonLinea.getText());
+                        ps.setString(2, txtClonModelo.getText());
+                        ps.setString(3, txtClonArticulo.getText());
+                        ps.setString(4, txtClonCombinacion.getText());
+                        ps.setInt(5, rs.getInt("activo"));
+                        ps.setDouble(6, rs.getDouble("manipulacion"));
+                        ps.setDouble(7, rs.getDouble("costura"));
+                        ps.setDouble(8, rs.getDouble("inyeccion"));
+                        ps.setDouble(9, rs.getDouble("salarioInyeccion"));
+                        ps.setDouble(10, rs.getDouble("subTotal"));
+                        ps.setDouble(11, rs.getDouble("gastosIndirectos"));
+                        ps.setDouble(12, rs.getDouble("fabricacion"));
+                        ps.setDouble(13, rs.getDouble("porcentaje"));
+                        ps.setDouble(14, rs.getDouble("utilidad"));
+                        ps.setDouble(15, rs.getDouble("merma"));
+                        ps.setDouble(16, rs.getDouble("total"));
                         ps.setBlob(17, rs.getBlob("imagen"));
                         ps.execute();
                         ps.close();
-      
-               }catch (SQLException ex) {
-                Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
-               }  
-           }
-       }catch (SQLException ex) {
+                        // clonado terminado
+                        JOptionPane.showMessageDialog(this, "Clonado Terminado"); 
+                        // limpiamos campos
+                        txtArticulo.setText("");
+                        txtModelo.setText("");
+                        txtLinea.setText("");
+                        txtArticuloBuscar.setText("");
+                        txtCombinacion.setText("");
+                        txtClonArticulo.setText("");
+                        txtClonModelo.setText("");
+                        txtClonLinea.setText("");
+                        txtClonCombinacion.setText("");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } catch (SQLException ex) {
                 Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
             }
-       }
+           
+        }
     }//GEN-LAST:event_btnClonarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -442,6 +475,7 @@ public class DuplicarModelo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnClonar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
