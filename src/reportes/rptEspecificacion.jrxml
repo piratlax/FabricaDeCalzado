@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptEspecificacion" language="groovy" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="166a34ad-83f6-47a2-928c-a0641b27e1b2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     especificacion.`codigo` AS especificacion_codigo,
+     especificacion.`pieza` AS especificacion_pieza,
+     especificacion.`nombre` AS especificacion_nombre,
+     especificacion.`medida` AS especificacion_medida,
+     especificacion.`consumo` AS especificacion_consumo,
+     especificacion.`precio` AS especificacion_precio,
+     especificacion.`resultado` AS especificacion_resultado,
+     especificacion.`proceso` AS especificacion_proceso,
+     calzado.`linea` AS calzado_linea,
+     calzado.`modelo` AS calzado_modelo,
+     calzado.`articulo` AS calzado_articulo,
+     calzado.`color` AS calzado_color,
+     calzado.`activo` AS calzado_activo,
+     calzado.`manipulacion` AS calzado_manipulacion,
+     calzado.`costura` AS calzado_costura,
+     calzado.`inyeccion` AS calzado_inyeccion,
+     calzado.`salarioInyeccion` AS calzado_salarioInyeccion,
+     calzado.`subTotal` AS calzado_subTotal,
+     calzado.`gastosIndirectos` AS calzado_gastosIndirectos,
+     calzado.`fabricacion` AS calzado_fabricacion,
+     calzado.`porcentaje` AS calzado_porcentaje,
+     calzado.`utilidad` AS calzado_utilidad,
+     calzado.`merma` AS calzado_merma,
+     calzado.`total` AS calzado_total
+FROM
+     `especificacion` especificacion,
+     `calzado` calzado
+ORDER BY
+     especificacion.`proceso` ASC]]>
+	</queryString>
+	<field name="especificacion_codigo" class="java.lang.String"/>
+	<field name="especificacion_pieza" class="java.lang.String"/>
+	<field name="especificacion_nombre" class="java.lang.String"/>
+	<field name="especificacion_medida" class="java.lang.String"/>
+	<field name="especificacion_consumo" class="java.math.BigDecimal"/>
+	<field name="especificacion_precio" class="java.math.BigDecimal"/>
+	<field name="especificacion_resultado" class="java.math.BigDecimal"/>
+	<field name="especificacion_proceso" class="java.lang.String"/>
+	<field name="calzado_linea" class="java.lang.String"/>
+	<field name="calzado_modelo" class="java.lang.String"/>
+	<field name="calzado_articulo" class="java.lang.String"/>
+	<field name="calzado_color" class="java.lang.String"/>
+	<field name="calzado_activo" class="java.lang.Boolean"/>
+	<field name="calzado_manipulacion" class="java.lang.Double"/>
+	<field name="calzado_costura" class="java.lang.Double"/>
+	<field name="calzado_inyeccion" class="java.lang.Double"/>
+	<field name="calzado_salarioInyeccion" class="java.lang.Double"/>
+	<field name="calzado_subTotal" class="java.lang.Double"/>
+	<field name="calzado_gastosIndirectos" class="java.lang.Double"/>
+	<field name="calzado_fabricacion" class="java.lang.Double"/>
+	<field name="calzado_porcentaje" class="java.lang.Double"/>
+	<field name="calzado_utilidad" class="java.lang.Double"/>
+	<field name="calzado_merma" class="java.lang.Double"/>
+	<field name="calzado_total" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="4" width="572" height="75" uuid="716c4e94-e195-481e-a4be-f868e6f5f72e"/>
+				<imageExpression><![CDATA["/Users/MaoRivera/NetBeansProjects/TallerDeCalzado/src/reportes/cabecera.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

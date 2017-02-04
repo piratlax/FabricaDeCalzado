@@ -1342,9 +1342,7 @@ public class catalogo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void integraTabla(String proceso) {
-
-    }
+    
     private void btnIntegrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntegrarActionPerformed
 
         // preparamos la funcion de integracion a "manipulacion"        
