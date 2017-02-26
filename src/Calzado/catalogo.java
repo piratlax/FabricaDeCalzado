@@ -58,18 +58,7 @@ public class catalogo extends javax.swing.JFrame {
         btnIntegrarInyeccion.setEnabled(false);
         btnImagen.setEnabled(false);
 
-        //desactivamos los campos que no se podran tocar
-        /*
-        txtSubManipulacion.setEnabled(false);
-        txtSubManipulacion1.setEnabled(false);
-        txtSubManipulacion2.setEnabled(false);
-        txtTotalMan.setEnabled(false);
-        txtTotalCos.setEnabled(false);
-        txtTotalIny.setEnabled(false);
-        txtSubTotal.setEnabled(false);
-        txtCostoFabricacion.setEnabled(false);
-        txtUtilidad.setEnabled(false);
-        */
+       
         btnGuardar.setEnabled(false);
 
     }
