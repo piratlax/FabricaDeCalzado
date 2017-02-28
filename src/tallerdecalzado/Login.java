@@ -6,11 +6,17 @@
 package tallerdecalzado;
 
 import Calzado.CalzadoPrincipal;
+import Logica.conexion;
+import administracion.Administracion;
 import inventarios.Principal;
 import inventarios.frmInventario;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -22,21 +28,23 @@ import javax.swing.JOptionPane;
  * @author MaoRivera
  */
 public class Login extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Login
-     */
+    
+    conexion con=new conexion();
+    Connection cn=con.conectar();
+    
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
-       ImageIcon img = new ImageIcon("Graficos/icono.png");
-       this.setIconImage(img.getImage());
-       txtUsuario.requestFocus();
+        ImageIcon img = new ImageIcon("Graficos/icono.png");
+        this.setIconImage(img.getImage());
+        txtUsuario.requestFocus();
     }
-    public Image getIconImage(){
-     Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Graficos/icono.png"));
-     return retValue;
+
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Graficos/icono.png"));
+        return retValue;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,7 +96,7 @@ public class Login extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Graficos/login.jpg"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 635, 640));
@@ -101,8 +109,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       // Acceso
-        if (txtUsuario.getText().equals("Leonardo")){
+        // Acceso
+        /*if (txtUsuario.getText().equals("Leonardo")){
             CalzadoPrincipal frm=new CalzadoPrincipal();
            
             frm.setVisible(true);
@@ -115,7 +123,61 @@ public class Login extends javax.swing.JFrame {
         }else {
             JOptionPane.showMessageDialog(null, "Escribe bien el usuario");
             txtUsuario.setText("");
+        }*/
+        boolean acceso = false;
+        try {
+            String sql = "SELECT * FROM usuario WHERE usuario='" + txtUsuario.getText() + "'";
+            Statement st;
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+
+                if (txtClave.getText().equals(rs.getString("clave"))) {
+                     if (rs.getString("categoria").equals("Administrador")) {
+                        JOptionPane.showMessageDialog(null, "Bienvenido Administrador");
+                        new Administracion().setVisible(true);
+                        this.dispose();
+                        acceso = true;
+
+                    } else if (rs.getString("categoria").equals("Inventarios")) {
+                        //Se abre el menu de Inventarios
+                        JOptionPane.showMessageDialog(null, "Bienvenido al area de Inventarios");
+                        new Principal().setVisible(true);
+                        this.dispose();
+                        acceso = true;
+                    } else if (rs.getString("categoria").equals("Calzado")) {
+                        //Se abre el menu de Calzado
+                        JOptionPane.showMessageDialog(null, "Bienvenido al area de Calzado");
+                        new CalzadoPrincipal().setVisible(true);
+                        this.dispose();
+                        acceso = true;
+                    }else if (rs.getString("categoria").equals("Produccion")) {
+                        //Se abre el menu de Produccion
+                        JOptionPane.showMessageDialog(null, "Bienvenido al area de Producción");
+                        new CalzadoPrincipal().setVisible(true);
+                        this.dispose();
+                        acceso = true;
+
+                    }
+                   
+
+                }
+                
+                
+                
+            }if (acceso==false){
+            JOptionPane.showMessageDialog(null, "Usuario no reconocido por el sistema");
+                txtClave.setText("");
+                txtUsuario.requestFocus();
+                txtUsuario.setText("");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
+        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
