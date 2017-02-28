@@ -10,14 +10,18 @@ import com.mxrck.autocompleter.TextAutoCompleter;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -103,6 +107,7 @@ public class OrdenProduccion extends javax.swing.JFrame {
         txtCalzado = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtOrden = new javax.swing.JTextField();
+        txtCombinacion = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaOrden = new javax.swing.JTable();
@@ -190,6 +195,8 @@ public class OrdenProduccion extends javax.swing.JFrame {
 
         jLabel2.setText("Orden");
 
+        txtCombinacion.setText(" ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -255,6 +262,10 @@ public class OrdenProduccion extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnProgramar)))
                 .addContainerGap(44, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtCombinacion, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,7 +308,9 @@ public class OrdenProduccion extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(jLabel2)
                     .addComponent(txtOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                .addGap(2, 2, 2)
+                .addComponent(txtCombinacion)
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Planeacion"));
@@ -480,6 +493,7 @@ public class OrdenProduccion extends javax.swing.JFrame {
             
             //colocamos datos del calzado
             txtCalzado.setText(rs.getString("modelo"));
+            txtCombinacion.setText(rs.getString("color"));
             
             //colocamos la imagen
             Blob blob = rs.getBlob("imagen");
@@ -602,6 +616,49 @@ public class OrdenProduccion extends javax.swing.JFrame {
         table = cn.createStatement();
         ResultSet rs=table.executeQuery(sql);
         while (rs.next()){
+            //codigo de la imagen aqui :)
+            /*
+            // Obtenemos la imagen
+        
+            try {
+            String sql = "SELECT * FROM calzado where articulo='"+txtArticulo.getText()+"'";
+            Statement verificar;
+            verificar = cn.createStatement();
+            ResultSet rs = verificar.executeQuery(sql);
+            while (rs.next()) {
+            
+            
+            //colocamos datos del calzado
+            txtCalzado.setText(rs.getString("modelo"));
+            
+            //colocamos la imagen
+            Blob blob = rs.getBlob("imagen");
+
+                int blobLength = (int) blob.length();
+
+                byte[] blobAsBytes = blob.getBytes(1, blobLength);
+                final BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(blobAsBytes));
+                
+                
+            ImageIcon icon = new ImageIcon(bufferedImage);
+            Image conversion = icon.getImage();
+            Image escala = conversion.getScaledInstance(100, 68, Image.SCALE_SMOOTH);
+            ImageIcon calzado = new ImageIcon(escala);
+            imgCalzado.setIcon(calzado);
+
+            }
+            
+        
+        } catch (SQLException ex) {
+            System.out.println("Sin poder ejecutar el query a la tabla1");
+        }  catch (IOException ex) {
+               Logger.getLogger(OrdenProduccion.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        
+       
+            */
+            
+            
            registros[0]=rs.getString("nombre");
            registros[1]=rs.getString("usuario");
            registros[2]=rs.getString("clave");
@@ -629,8 +686,53 @@ public class OrdenProduccion extends javax.swing.JFrame {
        }else{
        //pasamos la orden de compra al campo
        txtOrdenTabla.setText(txtOrden.getText());
-        
-       } 
+       //asignamos valores
+       String compra=txtOrden.getText();
+       String modelo=txtCalzado.getText();
+       String combinacion=txtCombinacion.getText();
+       String plano=txtPlano.getText();
+       int v12=Integer.parseInt(txt12.getText());
+       int v13=Integer.parseInt(txt13.getText());
+       int v14=Integer.parseInt(txt14.getText());
+       int v15=Integer.parseInt(txt15.getText());
+       int v16=Integer.parseInt(txt16.getText());
+       int v17=Integer.parseInt(txt17.getText());
+       int pares=Integer.parseInt(txtTotal.getText());
+       java.sql.Date sqldate = new java.sql.Date(fechaOrden.getDate().getTime());
+       
+//integrar en la BD
+       try{
+            PreparedStatement pps=cn.prepareStatement("INSERT INTO 'compra' (compra,modelo,combinacion,plano,12,13,14,15,16,17,pares,fecha "+
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+            pps.setString(1,compra);
+            pps.setString(2,modelo);
+            pps.setString(3,combinacion);
+            pps.setString(4,plano);
+            pps.setInt(5,v12);
+            pps.setInt(6,v13);
+            pps.setInt(7,v14);
+            pps.setInt(8,v15);
+            pps.setInt(9,v16);
+            pps.setInt(10,v17);
+            pps.setInt(11,pares);
+            pps.setDate(12, sqldate);
+            pps.executeUpdate();
+            JOptionPane.showMessageDialog(capturista.this, "El pago se ha integrado al sistema correctamente","Informacion",1);
+            //se dejan en blanco los campos
+            Pnombre.setText("");
+            Pcolonia.setText("");
+            Pdireccion.setText("");
+            Pcontrato.setText("");
+            Pfolio.setText("");
+            Precibo.setText("CAPAT");
+            }
+            catch (SQLException ex) {
+            Logger.getLogger(alta.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(capturista.this, "error en la BD, no se ha integrado el registro","error",0);
+                
+            }
+       
+       }
     }//GEN-LAST:event_btnProgramarActionPerformed
 
     /**
@@ -700,6 +802,7 @@ public class OrdenProduccion extends javax.swing.JFrame {
     private javax.swing.JTextField txt17;
     private javax.swing.JTextField txtArticulo;
     private javax.swing.JLabel txtCalzado;
+    private javax.swing.JLabel txtCombinacion;
     private javax.swing.JTextField txtOrden;
     private javax.swing.JLabel txtOrdenTabla;
     private javax.swing.JLabel txtPlano;
