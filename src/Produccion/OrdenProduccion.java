@@ -21,6 +21,7 @@ import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -108,6 +109,8 @@ public class OrdenProduccion extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txtOrdenTabla = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtArticulo = new javax.swing.JTextField();
@@ -134,6 +137,11 @@ public class OrdenProduccion extends javax.swing.JFrame {
         jLabel10.setText("Total");
 
         btnProgramar.setText("Programar");
+        btnProgramar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProgramarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("13");
 
@@ -193,20 +201,15 @@ public class OrdenProduccion extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4))
                     .addComponent(txtCalzado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(29, 29, 29)
-                .addComponent(txtPlano, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtOrden)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnProgramar))
+                        .addGap(29, 29, 29)
+                        .addComponent(txtPlano, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt12, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,8 +245,16 @@ public class OrdenProduccion extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addComponent(jLabel11))
-                            .addComponent(txt17, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                            .addComponent(txt17, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnProgramar)))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,6 +323,10 @@ public class OrdenProduccion extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Orden");
+
+        txtOrdenTabla.setText(" ");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -324,6 +339,10 @@ public class OrdenProduccion extends javax.swing.JFrame {
                         .addComponent(btnEditar)
                         .addGap(18, 18, 18)
                         .addComponent(btnBorrar)
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtOrdenTabla)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalir)))
                 .addContainerGap())
@@ -335,7 +354,9 @@ public class OrdenProduccion extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar)
                     .addComponent(btnBorrar)
-                    .addComponent(btnSalir))
+                    .addComponent(btnSalir)
+                    .addComponent(jLabel3)
+                    .addComponent(txtOrdenTabla))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -564,6 +585,53 @@ public class OrdenProduccion extends javax.swing.JFrame {
     private void txt17FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt17FocusLost
        sumar();
     }//GEN-LAST:event_txt17FocusLost
+     // Se crea el modelo para la tabla
+    DefaultTableModel modelo;
+    private void tabla(){
+        //preparamos la tabla
+        String[] cabecera={"Foto","Modelo","Combinacion","Plano","12","13","14","15","16","17","Pares"};
+        // se definen los registros que llevara la tabla
+        String[] registros=new String[11];
+        // se hace el llamado sql de todas las ordenes de la compra
+        String sql="SELECT * FROM compra WHERE compra='"+txtOrdenTabla.getText()+"'";
+        //establecemos los anchos en pixeles de las columnas
+       int[] anchos={50,50,100,50,20,20,20,20,20,20,30};
+        modelo= new DefaultTableModel(null,cabecera);
+        try {
+        Statement table;
+        table = cn.createStatement();
+        ResultSet rs=table.executeQuery(sql);
+        while (rs.next()){
+           registros[0]=rs.getString("nombre");
+           registros[1]=rs.getString("usuario");
+           registros[2]=rs.getString("clave");
+           registros[3]=rs.getString("categoria");
+           modelo.addRow(registros);
+           
+       }
+       tablaOrden.setModel(modelo);
+       for (int i=0;i<cabecera.length;i++){
+          tablaOrden.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+          tablaOrden.setFont(new java.awt.Font("Tahoma", 0, 12));
+       }
+       }
+       catch (SQLException ex){
+           System.out.println ("Sin poder ejecutar el query a la tabla");
+       }
+    }
+    private void btnProgramarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProgramarActionPerformed
+        // integrar todo a la tabla 
+       //primero verificamos campos no esten vacios
+       
+       if (txtOrden.getText().equals("") || txtTotal.getText().equals(""))
+       {
+        JOptionPane.showMessageDialog(this, "Te Faltan datos");
+       }else{
+       //pasamos la orden de compra al campo
+       txtOrdenTabla.setText(txtOrden.getText());
+        
+       } 
+    }//GEN-LAST:event_btnProgramarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -612,6 +680,7 @@ public class OrdenProduccion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -632,6 +701,7 @@ public class OrdenProduccion extends javax.swing.JFrame {
     private javax.swing.JTextField txtArticulo;
     private javax.swing.JLabel txtCalzado;
     private javax.swing.JTextField txtOrden;
+    private javax.swing.JLabel txtOrdenTabla;
     private javax.swing.JLabel txtPlano;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables

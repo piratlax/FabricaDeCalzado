@@ -69,9 +69,15 @@ public class GestionPersonal extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Arial Narrow", 0, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Alta de Personal");
+        jLabel1.setText("Gestion de Personal");
 
         jLabel2.setText("Nombre");
+
+        JTnombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                JTnombreFocusLost(evt);
+            }
+        });
 
         jLabel3.setText("Usuario");
 
@@ -79,7 +85,7 @@ public class GestionPersonal extends javax.swing.JFrame {
 
         jLabel6.setText("Categoria");
 
-        JCcategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Inventarios", "Calzado", "Produccion" }));
+        JCcategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Inventarios", "Calzado", "Produccion" }));
         JCcategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JCcategoriaActionPerformed(evt);
@@ -353,8 +359,7 @@ public class GestionPersonal extends javax.swing.JFrame {
                     JTclave.getText()+"','"+
                     JCcategoria.getSelectedItem().toString()+"')";
             insertar.executeUpdate(sql);
-            insertar.close();
-            cn.commit();
+            
             
             
             JOptionPane.showMessageDialog(null,"se agregado al nuevo usuario");
@@ -435,8 +440,7 @@ public class GestionPersonal extends javax.swing.JFrame {
             String sql="UPDATE usuario SET usuario='"+JTusuario.getText()+"',nombre='"+JTnombre.getText()+"',"+
                     "clave='"+JTclave.getText()+"',categoria='"+nuevaCategoria+"' WHERE usuario='"+JTusuario.getText()+"'";
             modificar.executeUpdate(sql);
-            modificar.close();
-            cn.commit();
+            
             
             JOptionPane.showMessageDialog(null,"se ha modificado el Usuario "+JTusuario.getText());
             tabla();
@@ -460,6 +464,10 @@ public class GestionPersonal extends javax.swing.JFrame {
     private void JCcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCcategoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JCcategoriaActionPerformed
+
+    private void JTnombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTnombreFocusLost
+       JTusuario.requestFocus();
+    }//GEN-LAST:event_JTnombreFocusLost
     
     void camposInicio(){
         JTnombre.setEnabled(false);
