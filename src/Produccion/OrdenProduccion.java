@@ -609,8 +609,8 @@ public class OrdenProduccion extends javax.swing.JFrame {
         // se definen los registros que llevara la tabla
         String[] registros = new String[10];
         // se hace el llamado sql de todas las ordenes de la compra
-        String sql = "SELECT * FROM compra";
-        //String sql = "SELECT * FROM compra WHERE compra='" + txtOrdenTabla.getText() + "'";
+        
+        String sql = "SELECT * FROM compra WHERE compra='" + txtOrdenTabla.getText() + "'";
         //establecemos los anchos en pixeles de las columnas
         int[] anchos = {50, 100, 50, 20, 20, 20, 20, 20, 20, 30};
         modelo = new DefaultTableModel(null, cabecera);
@@ -740,6 +740,7 @@ public class OrdenProduccion extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Hay un problema con la BD, el prometido no afectado inventario");
                     }
                 }
+                tabla();
                 //se dejan en blanco los campos
                 txtPlano.setText("");
                 txtCalzado.setText("");
