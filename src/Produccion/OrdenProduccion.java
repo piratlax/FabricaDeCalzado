@@ -33,16 +33,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class OrdenProduccion extends javax.swing.JFrame {
 
-   conexion con= new conexion();
-   Connection cn=con.conectar();
+    conexion con = new conexion();
+    Connection cn = con.conectar();
+
     public OrdenProduccion() {
         initComponents();
         this.setLocationRelativeTo(null);
         asignarAutocompletado();
         iniciar();
+        tabla();
     }
-    
-    public void iniciar(){
+
+    public void iniciar() {
         txt12.setEnabled(false);
         txt13.setEnabled(false);
         txt14.setEnabled(false);
@@ -52,8 +54,9 @@ public class OrdenProduccion extends javax.swing.JFrame {
         txtTotal.setEnabled(false);
         txtOrden.setEnabled(false);
         btnProgramar.setEnabled(false);
-        
+
     }
+
     // iniciamos autocompletado de los 3 campos dobles
     public void asignarAutocompletado() {
         TextAutoCompleter textAutoCompleter = new TextAutoCompleter(txtArticulo);
@@ -76,6 +79,7 @@ public class OrdenProduccion extends javax.swing.JFrame {
         }
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -438,140 +442,137 @@ public class OrdenProduccion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sumar(){
+    private void sumar() {
         txtTotal.setText("0");
-        int v12=0;
-        int v13=0;
-        int v14=0;
-        int v15=0;
-        int v16=0;
-        int v17=0;
+        int v12 = 0;
+        int v13 = 0;
+        int v14 = 0;
+        int v15 = 0;
+        int v16 = 0;
+        int v17 = 0;
         try {
-        
-        if (txt12.getText().length()>0){
-        v12=Integer.parseInt(txt12.getText());
-        } 
-        
-        if (txt13.getText().length()>0){
-        v13=Integer.parseInt(txt13.getText());
-        } 
-        
-        if (txt14.getText().length()>0){
-        v14=Integer.parseInt(txt14.getText());
-        } 
-        
-        if (txt15.getText().length()>0){
-        v15=Integer.parseInt(txt15.getText());
-        }
-        
-        if (txt16.getText().length()>0){
-        v16=Integer.parseInt(txt16.getText());
-        }
-        
-        if (txt17.getText().length()>0){
-        v17=Integer.parseInt(txt17.getText());
-        }
-        int total=v12+v13+v14+v15+v16+v17;
-        String resultado=String.valueOf(total);
-        txtTotal.setText(resultado);
+
+            if (txt12.getText().length() > 0) {
+                v12 = Integer.parseInt(txt12.getText());
+            }
+
+            if (txt13.getText().length() > 0) {
+                v13 = Integer.parseInt(txt13.getText());
+            }
+
+            if (txt14.getText().length() > 0) {
+                v14 = Integer.parseInt(txt14.getText());
+            }
+
+            if (txt15.getText().length() > 0) {
+                v15 = Integer.parseInt(txt15.getText());
+            }
+
+            if (txt16.getText().length() > 0) {
+                v16 = Integer.parseInt(txt16.getText());
+            }
+
+            if (txt17.getText().length() > 0) {
+                v17 = Integer.parseInt(txt17.getText());
+            }
+            int total = v12 + v13 + v14 + v15 + v16 + v17;
+            String resultado = String.valueOf(total);
+            txtTotal.setText(resultado);
         } catch (Exception e) {
         }
     }
     private void btnIntegrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntegrarActionPerformed
-        try{
-        if (txtArticulo.getText().length()>0 ){
-            
-            Boolean existe=false;
-            //iniciamos
-            try {
-            String sql = "SELECT * FROM calzado where articulo='"+txtArticulo.getText()+"'";
-            Statement verificar;
-            verificar = cn.createStatement();
-            ResultSet rs = verificar.executeQuery(sql);
-            while (rs.next()) {
-            existe=true;
-            
-            //colocamos datos del calzado
-            txtCalzado.setText(rs.getString("modelo"));
-            txtCombinacion.setText(rs.getString("color"));
-            
-            //colocamos la imagen
-            Blob blob = rs.getBlob("imagen");
+        try {
+            if (txtArticulo.getText().length() > 0) {
 
-                int blobLength = (int) blob.length();
+                Boolean existe = false;
+                //iniciamos
+                try {
+                    String sql = "SELECT * FROM calzado where articulo='" + txtArticulo.getText() + "'";
+                    Statement verificar;
+                    verificar = cn.createStatement();
+                    ResultSet rs = verificar.executeQuery(sql);
+                    while (rs.next()) {
+                        existe = true;
 
-                byte[] blobAsBytes = blob.getBytes(1, blobLength);
-                final BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(blobAsBytes));
-                
-                
-            ImageIcon icon = new ImageIcon(bufferedImage);
-            Image conversion = icon.getImage();
-            Image escala = conversion.getScaledInstance(100, 68, Image.SCALE_SMOOTH);
-            ImageIcon calzado = new ImageIcon(escala);
-            imgCalzado.setIcon(calzado);
+                        //colocamos datos del calzado
+                        txtCalzado.setText(rs.getString("modelo"));
+                        txtCombinacion.setText(rs.getString("color"));
+
+                        //colocamos la imagen
+                        Blob blob = rs.getBlob("imagen");
+
+                        int blobLength = (int) blob.length();
+
+                        byte[] blobAsBytes = blob.getBytes(1, blobLength);
+                        final BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(blobAsBytes));
+
+                        ImageIcon icon = new ImageIcon(bufferedImage);
+                        Image conversion = icon.getImage();
+                        Image escala = conversion.getScaledInstance(100, 68, Image.SCALE_SMOOTH);
+                        ImageIcon calzado = new ImageIcon(escala);
+                        imgCalzado.setIcon(calzado);
+
+                    }
+
+                } catch (SQLException ex) {
+                    System.out.println("Sin poder ejecutar el query a la tabla1");
+                }
+                if (existe == true) {
+
+                    //pasamos la fecha seleccionada a el plano que usa la fabrica
+                    int JCdia = 0;
+                    int JCmes = 0;
+                    int JCanio = 0;
+                    try {
+                        String formato = fechaOrden.getDateFormatString();
+                        Date date = fechaOrden.getDate();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+                        SimpleDateFormat sdfM = new SimpleDateFormat("MM");
+                        SimpleDateFormat sdfD = new SimpleDateFormat("dd");
+                        JCdia = Integer.parseInt(sdfD.format(date));
+                        JCmes = Integer.parseInt(sdfM.format(date));
+                        JCanio = Integer.parseInt(sdf.format(date));
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Selecciona una fecha", "Error..!!", JOptionPane.ERROR_MESSAGE);
+
+                    }
+
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(JCanio, JCmes - 1, JCdia);  // 2011-04-08
+                    String Semana = null;
+                    int semana = calendar.get(Calendar.WEEK_OF_YEAR);
+                    int year = calendar.get(Calendar.YEAR);
+                    int dia = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+                    if (semana < 10) {
+                        Semana = "0" + String.valueOf(semana);
+                    } else {
+                        Semana = String.valueOf(semana);
+                    }
+                    String Year = String.valueOf(year);
+                    String plano = Year.charAt(3) + Semana + String.valueOf(dia);
+                    txtPlano.setText(plano);
+                    txt12.setEnabled(true);
+                    txt13.setEnabled(true);
+                    txt14.setEnabled(true);
+                    txt15.setEnabled(true);
+                    txt16.setEnabled(true);
+                    txt17.setEnabled(true);
+                    txtOrden.setEnabled(true);
+                    btnProgramar.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "no existe el articulo en la BD");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "te faltan datos");
 
             }
+        } catch (Exception e) {
 
-        } catch (SQLException ex) {
-            System.out.println("Sin poder ejecutar el query a la tabla1");
         }
-    if (existe==true){        
-            
-    //pasamos la fecha seleccionada a el plano que usa la fabrica
-       int JCdia=0;
-       int JCmes=0;
-       int JCanio=0;
-    try {
-    String formato = fechaOrden.getDateFormatString();
-    Date date = fechaOrden.getDate();
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-    SimpleDateFormat sdfM = new SimpleDateFormat("MM");
-    SimpleDateFormat sdfD = new SimpleDateFormat("dd");
-    JCdia=Integer.parseInt(sdfD.format(date));
-    JCmes=Integer.parseInt(sdfM.format(date));
-    JCanio=Integer.parseInt(sdf.format(date));
-    } catch (Exception e) {
-    JOptionPane.showMessageDialog(null, "Selecciona una fecha", "Error..!!", JOptionPane.ERROR_MESSAGE);
-
-    } 
-       
-       
-       Calendar calendar = Calendar.getInstance();
-        calendar.set(JCanio, JCmes-1, JCdia);  // 2011-04-08
-        String Semana=null;
-        int semana = calendar.get(Calendar.WEEK_OF_YEAR);
-        int year = calendar.get(Calendar.YEAR);
-        int dia=calendar.get(Calendar.DAY_OF_WEEK)-1;
-        if (semana<10){
-            Semana="0"+String.valueOf(semana);
-        }else{
-            Semana=String.valueOf(semana);
-        }
-        String Year=String.valueOf(year);
-        String plano=Year.charAt(3)+Semana+String.valueOf(dia);
-        txtPlano.setText(plano);
-        txt12.setEnabled(true);
-        txt13.setEnabled(true);
-        txt14.setEnabled(true);
-        txt15.setEnabled(true);
-        txt16.setEnabled(true);
-        txt17.setEnabled(true);
-        txtOrden.setEnabled(true);
-        btnProgramar.setEnabled(true);
-    }else {
-        JOptionPane.showMessageDialog(this, "no existe el articulo en la BD");
-    }
-        
-        }else {
-            JOptionPane.showMessageDialog(this, "te faltan datos");
-        
-        }
-        }
-        catch (Exception e) {
-        
-                }   
     }//GEN-LAST:event_btnIntegrarActionPerformed
-    
+
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -585,51 +586,50 @@ public class OrdenProduccion extends javax.swing.JFrame {
     }//GEN-LAST:event_txt13FocusLost
 
     private void txt14FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt14FocusLost
-       sumar();
+        sumar();
     }//GEN-LAST:event_txt14FocusLost
 
     private void txt15FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt15FocusLost
-       sumar();
+        sumar();
     }//GEN-LAST:event_txt15FocusLost
 
     private void txt16FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt16FocusLost
-      sumar();
+        sumar();
     }//GEN-LAST:event_txt16FocusLost
 
     private void txt17FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt17FocusLost
-       sumar();
+        sumar();
     }//GEN-LAST:event_txt17FocusLost
-     // Se crea el modelo para la tabla
+    // Se crea el modelo para la tabla
     DefaultTableModel modelo;
-    private void tabla(){
+
+    private void tabla() {
         //preparamos la tabla
-        String[] cabecera={"Foto","Modelo","Combinacion","Plano","12","13","14","15","16","17","Pares"};
+        String[] cabecera = { "Modelo", "Combinacion", "Plano", "12", "13", "14", "15", "16", "17", "Pares"};
         // se definen los registros que llevara la tabla
-        String[] registros=new String[11];
+        String[] registros = new String[10];
         // se hace el llamado sql de todas las ordenes de la compra
-        String sql="SELECT * FROM compra WHERE compra='"+txtOrdenTabla.getText()+"'";
+        String sql = "SELECT * FROM compra";
+        //String sql = "SELECT * FROM compra WHERE compra='" + txtOrdenTabla.getText() + "'";
         //establecemos los anchos en pixeles de las columnas
-       int[] anchos={50,50,100,50,20,20,20,20,20,20,30};
-        modelo= new DefaultTableModel(null,cabecera);
+        int[] anchos = {50, 100, 50, 20, 20, 20, 20, 20, 20, 30};
+        modelo = new DefaultTableModel(null, cabecera);
+        ImageIcon calzado=null;
         try {
-        Statement table;
-        table = cn.createStatement();
-        ResultSet rs=table.executeQuery(sql);
-        while (rs.next()){
-            //codigo de la imagen aqui :)
-            /*
+            Statement table;
+            table = cn.createStatement();
+            ResultSet rs = table.executeQuery(sql);
+            while (rs.next()) {
+                //codigo de la imagen aqui :)
+               
             // Obtenemos la imagen
         
             try {
-            String sql = "SELECT * FROM calzado where articulo='"+txtArticulo.getText()+"'";
+            String sqlImagen = "SELECT * FROM calzado where articulo='"+txtArticulo.getText()+"'";
             Statement verificar;
             verificar = cn.createStatement();
-            ResultSet rs = verificar.executeQuery(sql);
-            while (rs.next()) {
-            
-            
-            //colocamos datos del calzado
-            txtCalzado.setText(rs.getString("modelo"));
+            ResultSet rsImagen = verificar.executeQuery(sqlImagen);
+            while (rsImagen.next()) {
             
             //colocamos la imagen
             Blob blob = rs.getBlob("imagen");
@@ -643,96 +643,122 @@ public class OrdenProduccion extends javax.swing.JFrame {
             ImageIcon icon = new ImageIcon(bufferedImage);
             Image conversion = icon.getImage();
             Image escala = conversion.getScaledInstance(100, 68, Image.SCALE_SMOOTH);
-            ImageIcon calzado = new ImageIcon(escala);
-            imgCalzado.setIcon(calzado);
-
+            calzado = new ImageIcon(escala);
             }
-            
-        
         } catch (SQLException ex) {
             System.out.println("Sin poder ejecutar el query a la tabla1");
         }  catch (IOException ex) {
                Logger.getLogger(OrdenProduccion.class.getName()).log(Level.SEVERE, null, ex);
            }
-        
-       
-            */
-            
-            
-           registros[0]=rs.getString("nombre");
-           registros[1]=rs.getString("usuario");
-           registros[2]=rs.getString("clave");
-           registros[3]=rs.getString("categoria");
-           modelo.addRow(registros);
-           
-       }
-       tablaOrden.setModel(modelo);
-       for (int i=0;i<cabecera.length;i++){
-          tablaOrden.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-          tablaOrden.setFont(new java.awt.Font("Tahoma", 0, 12));
-       }
-       }
-       catch (SQLException ex){
-           System.out.println ("Sin poder ejecutar el query a la tabla");
-       }
+                
+                registros[0] = rs.getString("modelo");
+                registros[1] = rs.getString("combinacion");
+                registros[2] = rs.getString("plano");
+                registros[3] = rs.getString("n12");
+                registros[4] = rs.getString("n13");
+                registros[5] = rs.getString("n14");
+                registros[6] = rs.getString("n15");
+                registros[7] = rs.getString("n16");
+                registros[8] = rs.getString("n17");
+                registros[9] = rs.getString("pares");
+                modelo.addRow(registros);
+
+            }
+            tablaOrden.setModel(modelo);
+            for (int i = 0; i < cabecera.length; i++) {
+                tablaOrden.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+                tablaOrden.setFont(new java.awt.Font("Tahoma", 0, 12));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Sin poder ejecutar el query a la tabla");
+        }
     }
     private void btnProgramarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProgramarActionPerformed
         // integrar todo a la tabla 
-       //primero verificamos campos no esten vacios
-       
-       if (txtOrden.getText().equals("") || txtTotal.getText().equals(""))
-       {
-        JOptionPane.showMessageDialog(this, "Te Faltan datos");
-       }else{
-       //pasamos la orden de compra al campo
-       txtOrdenTabla.setText(txtOrden.getText());
-       //asignamos valores
-       String compra=txtOrden.getText();
-       String modelo=txtCalzado.getText();
-       String combinacion=txtCombinacion.getText();
-       String plano=txtPlano.getText();
-       int v12=Integer.parseInt(txt12.getText());
-       int v13=Integer.parseInt(txt13.getText());
-       int v14=Integer.parseInt(txt14.getText());
-       int v15=Integer.parseInt(txt15.getText());
-       int v16=Integer.parseInt(txt16.getText());
-       int v17=Integer.parseInt(txt17.getText());
-       int pares=Integer.parseInt(txtTotal.getText());
-       java.sql.Date sqldate = new java.sql.Date(fechaOrden.getDate().getTime());
-       
+        //primero verificamos campos no esten vacios
+
+        if (txtOrden.getText().equals("") || txtTotal.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Te Faltan datos");
+        } else {
+            //pasamos la orden de compra al campo
+            txtOrdenTabla.setText(txtOrden.getText());
+            //asignamos valores
+            String compra = txtOrden.getText();
+            String modelo = txtCalzado.getText();
+            String combinacion = txtCombinacion.getText();
+            String plano = txtPlano.getText();
+            int v12 = Integer.parseInt(txt12.getText());
+            int v13 = Integer.parseInt(txt13.getText());
+            int v14 = Integer.parseInt(txt14.getText());
+            int v15 = Integer.parseInt(txt15.getText());
+            int v16 = Integer.parseInt(txt16.getText());
+            int v17 = Integer.parseInt(txt17.getText());
+            int pares = Integer.parseInt(txtTotal.getText());
+            java.sql.Date sqldate = new java.sql.Date(fechaOrden.getDate().getTime());
+
 //integrar en la BD
-       try{
-            PreparedStatement pps=cn.prepareStatement("INSERT INTO 'compra' (compra,modelo,combinacion,plano,12,13,14,15,16,17,pares,fecha "+
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-            pps.setString(1,compra);
-            pps.setString(2,modelo);
-            pps.setString(3,combinacion);
-            pps.setString(4,plano);
-            pps.setInt(5,v12);
-            pps.setInt(6,v13);
-            pps.setInt(7,v14);
-            pps.setInt(8,v15);
-            pps.setInt(9,v16);
-            pps.setInt(10,v17);
-            pps.setInt(11,pares);
-            pps.setDate(12, sqldate);
-            pps.executeUpdate();
-            JOptionPane.showMessageDialog(capturista.this, "El pago se ha integrado al sistema correctamente","Informacion",1);
-            //se dejan en blanco los campos
-            Pnombre.setText("");
-            Pcolonia.setText("");
-            Pdireccion.setText("");
-            Pcontrato.setText("");
-            Pfolio.setText("");
-            Precibo.setText("CAPAT");
+            try {
+                PreparedStatement pps = cn.prepareStatement("INSERT INTO compra (compra,modelo,combinacion,plano,n12,n13,n14,n15,n16,n17,pares,fecha) "
+                        + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+                pps.setString(1, compra);
+                pps.setString(2, modelo);
+                pps.setString(3, combinacion);
+                pps.setString(4, plano);
+                pps.setInt(5, v12);
+                pps.setInt(6, v13);
+                pps.setInt(7, v14);
+                pps.setInt(8, v15);
+                pps.setInt(9, v16);
+                pps.setInt(10, v17);
+                pps.setInt(11, pares);
+                pps.setDate(12, sqldate);
+                pps.executeUpdate();
+
+                // iniciamos la afectacion a la base de datos de inventario
+                String articulo = txtArticulo.getText();
+                String sqlInventario = "SELECT * from especificacion WHERE articulo='" + articulo + "'";
+                Statement stInventario;
+                stInventario = cn.createStatement();
+                ResultSet rsInventario = stInventario.executeQuery(sqlInventario);
+                while (rsInventario.next()) {
+                    String codigo = rsInventario.getString("codigo");
+                    Double consumo = rsInventario.getDouble("consumo");
+                    Double prometido = consumo * pares;
+                    //afectamos inventario
+                    String actualizar = "update inventario set prometido_cantidad=?,prometido=? WHERE codigo='" + codigo + "'";
+
+                    try {
+                        PreparedStatement ps;
+                        ps = cn.prepareStatement(actualizar);
+
+                        ps.setDouble(1, prometido);
+                        ps.setDate(2, sqldate);
+                        ps.executeUpdate();
+                        ps.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(OrdenProduccion.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(null, "Hay un problema con la BD, el prometido no afectado inventario");
+                    }
+                }
+                //se dejan en blanco los campos
+                txtPlano.setText("");
+                txtCalzado.setText("");
+                txtCombinacion.setText("");
+                txt12.setText("");
+                txt13.setText("");
+                txt14.setText("");
+                txt15.setText("");
+                txt16.setText("");
+                txt17.setText("");
+                txtArticulo.setText("");
+                txtTotal.setText("");
+            } catch (SQLException ex) {
+                Logger.getLogger(OrdenProduccion.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "error en la BD, no se ha integrado el registro", "error", 0);
+
             }
-            catch (SQLException ex) {
-            Logger.getLogger(alta.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(capturista.this, "error en la BD, no se ha integrado el registro","error",0);
-                
-            }
-       
-       }
+
+        }
     }//GEN-LAST:event_btnProgramarActionPerformed
 
     /**
