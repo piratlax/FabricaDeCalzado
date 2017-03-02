@@ -9,9 +9,9 @@ import javax.swing.JOptionPane;
 
 
 public class conexion {
-    
+    /*
     public String db="san_felipe";
-    public String url="jdbc:mysql://192.168.0.125/"+db;
+    public String url="jdbc:mysql://192.168.0.2/"+db+"?zeroDateTimeBehavior=convertToNull";
     public String user="sistema";
     public String pass="sanfelipe";
     /*
@@ -20,6 +20,10 @@ public class conexion {
     public String user="maoriver_root";
     public String pass="sanfelipe7502";
     */
+public String db="san_felipe";
+    public String url="jdbc:mysql://192.168.0.16/"+db+"?zeroDateTimeBehavior=convertToNull";
+    public String user="sistema";
+    public String pass="sanfelipe";
     
     public conexion() {
     }

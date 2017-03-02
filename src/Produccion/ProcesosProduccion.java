@@ -22,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,11 +39,13 @@ public class ProcesosProduccion extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         mostrarBienvenida();
         tabla();
+        btnIntegrar.setEnabled(false);
     }
     Date myDate = new Date();
     String fechaBuscar=new SimpleDateFormat("yyyy-MM-dd").format(myDate);
     // Se crea el modelo para la tabla
     DefaultTableModel modelo;
+    DefaultTableModel modelo2;
     conexion con = new conexion();
     Connection cn = con.conectar();
     
@@ -135,13 +138,13 @@ public class ProcesosProduccion extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtProceso = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        txtDetalle = new javax.swing.JTextField();
+        btnIntegrar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaOrden1 = new javax.swing.JTable();
+        tablaProcesos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -188,6 +191,11 @@ public class ProcesosProduccion extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaOrden);
 
         jButton1.setText("Crear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -217,7 +225,12 @@ public class ProcesosProduccion extends javax.swing.JFrame {
 
         jLabel3.setText("Detalle");
 
-        jButton2.setText("Integrar paso");
+        btnIntegrar.setText("Integrar paso");
+        btnIntegrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIntegrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -232,11 +245,11 @@ public class ProcesosProduccion extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(56, 56, 56)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)))
+                            .addComponent(txtProceso)
+                            .addComponent(txtDetalle)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(btnIntegrar)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -245,26 +258,26 @@ public class ProcesosProduccion extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtProceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2))
+                .addComponent(btnIntegrar))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Procesos"));
 
-        tablaOrden1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProcesos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Foto", "Modelo", "Comb.", "Plano"
+                "Plano", "Paso", "Proceso", "Detalle"
             }
         ));
-        jScrollPane2.setViewportView(tablaOrden1);
+        jScrollPane2.setViewportView(tablaProcesos);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -312,6 +325,49 @@ public class ProcesosProduccion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    String Plano=null;
+    int paso=1;
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //creacion de modelo
+        //ahora agrego los datos seleccionados de la tabla
+        int fila = tablaOrden.getSelectedRow();
+        
+       if (fila>=0){
+           JOptionPane.showMessageDialog(this, "Se inicia proceso de produccion");
+           Plano=tablaOrden.getValueAt(fila, 2).toString();
+           
+           btnIntegrar.setEnabled(true);
+           
+       }else{
+           JOptionPane.showMessageDialog(this, "Selecciona un plano");
+       }
+           
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnIntegrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntegrarActionPerformed
+        try {
+            String pasoNumero=Integer.toString(paso);
+            //se prepara a insertarlo en la tabla de usuarios   
+            Statement insertar=cn.createStatement();
+            String sql="INSERT INTO produccion (plano,paso,proceso,detalle,estado,fecha) VALUES ('"+
+                    Plano+"','"+
+                    pasoNumero+"','"+
+                    txtProceso.getText()+"','"+
+                    txtDetalle.getText()+"',"
+                    + "'iniciado','00-00-0000')";
+            insertar.executeUpdate(sql);
+            
+            
+            
+            JOptionPane.showMessageDialog(null,"se ha integrado el proceso");
+            paso++;
+            mostrarProcesos();
+            
+            } catch (SQLException ex) {
+            Logger.getLogger(ProcesosProduccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnIntegrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,6 +402,41 @@ public class ProcesosProduccion extends javax.swing.JFrame {
                 new ProcesosProduccion().setVisible(true);
             }
         });
+    }
+    private void mostrarProcesos(){
+            
+        String[] cabecera={"Plano","Paso","Proceso","Detalle"};
+        // se definen los registros que llevara la tabla
+        String[] registros=new String[4];
+        // se hace el llamado sql de todos los usuarios
+        String sql="SELECT * FROM produccion";
+         int[] anchos = {50, 50, 200, 200};
+        modelo2= new DefaultTableModel(null,cabecera);
+        
+        try {
+       
+       Statement table;
+       table = cn.createStatement();
+       ResultSet rs=table.executeQuery(sql);
+       while (rs.next()){
+           registros[0]=rs.getString("plano");
+           registros[1]=rs.getString("paso");
+           registros[2]=rs.getString("proceso");
+           registros[3]=rs.getString("detalle");
+           
+           
+           modelo2.addRow(registros);
+           
+       }
+       tablaProcesos.setModel(modelo2);
+       for (int i = 0; i < cabecera.length; i++) {
+                tablaOrden.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+                tablaOrden.setFont(new java.awt.Font("Tahoma", 0, 12));
+       
+       }
+        }catch (SQLException ex){
+           System.out.println ("Sin poder ejecutar el query a la tabla");
+       }
     }
 private void mostrarBienvenida(){
     java.util.Date fecha = new Date();
@@ -400,8 +491,8 @@ private void mostrarBienvenida(){
     
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIntegrar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -412,10 +503,10 @@ private void mostrarBienvenida(){
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tablaOrden;
-    private javax.swing.JTable tablaOrden1;
+    private javax.swing.JTable tablaProcesos;
     private javax.swing.JLabel txtBienvenida;
+    private javax.swing.JTextField txtDetalle;
+    private javax.swing.JTextField txtProceso;
     // End of variables declaration//GEN-END:variables
 }

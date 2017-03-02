@@ -38,9 +38,6 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         mnuDuplicar = new javax.swing.JMenuItem();
         mnuEliminar = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
@@ -89,16 +86,6 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
         jMenu2.add(mnuEliminar);
 
         jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Reportes");
-
-        jMenuItem5.setText("Especificacion");
-        jMenu3.add(jMenuItem5);
-
-        jMenuItem6.setText("Listado");
-        jMenu3.add(jMenuItem6);
-
-        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -183,12 +170,9 @@ public class CalzadoPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     public static javax.swing.JMenuItem mnuDuplicar;
     public static javax.swing.JMenuItem mnuEliminar;
     private javax.swing.JMenuItem mnuSalir;
