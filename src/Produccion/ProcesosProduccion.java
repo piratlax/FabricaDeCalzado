@@ -132,6 +132,7 @@ public class ProcesosProduccion extends javax.swing.JFrame {
         txtBienvenida = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaOrden = new javax.swing.JTable();
@@ -154,6 +155,8 @@ public class ProcesosProduccion extends javax.swing.JFrame {
 
         jLabel1.setText("Se tiene programado para hoy");
 
+        jButton2.setText("Salir");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,17 +168,21 @@ public class ProcesosProduccion extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(76, 76, 76)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addGap(2, 2, 2))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBienvenida)
-                    .addComponent(jLabel1))
-                .addContainerGap(32, Short.MAX_VALUE))
-            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtBienvenida)
+                        .addComponent(jLabel1))
+                    .addComponent(jButton2))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Planos"));
@@ -355,7 +362,7 @@ public class ProcesosProduccion extends javax.swing.JFrame {
                     pasoNumero+"','"+
                     txtProceso.getText()+"','"+
                     txtDetalle.getText()+"',"
-                    + "'iniciado','00-00-0000')";
+                    + "'Programado','"+fechaBuscar+"')";
             insertar.executeUpdate(sql);
             
             
@@ -493,6 +500,7 @@ private void mostrarBienvenida(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIntegrar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
