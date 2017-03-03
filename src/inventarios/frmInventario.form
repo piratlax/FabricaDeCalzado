@@ -369,13 +369,14 @@
         <Component class="javax.swing.JComboBox" name="cbounidad">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="6">
+              <StringArray count="7">
                 <StringItem index="0" value="PAR"/>
                 <StringItem index="1" value="PZA"/>
-                <StringItem index="2" value="ML"/>
-                <StringItem index="3" value="HOJA"/>
-                <StringItem index="4" value="LITRO"/>
-                <StringItem index="5" value="KILO"/>
+                <StringItem index="2" value="DM"/>
+                <StringItem index="3" value="ML"/>
+                <StringItem index="4" value="HOJA"/>
+                <StringItem index="5" value="LITRO"/>
+                <StringItem index="6" value="KILO"/>
               </StringArray>
             </Property>
           </Properties>

@@ -8,6 +8,7 @@ package tallerdecalzado;
 import Calzado.CalzadoPrincipal;
 import Logica.conexion;
 import Produccion.OrdenProduccion;
+import Produccion.menuProduccion;
 import administracion.Administracion;
 import inventarios.Principal;
 import inventarios.frmInventario;
@@ -155,7 +156,7 @@ public class Login extends javax.swing.JFrame {
                     }else if (rs.getString("categoria").equals("Produccion")) {
                         //Se abre el menu de Produccion
                         JOptionPane.showMessageDialog(null, "Bienvenido al area de Producción");
-                        new OrdenProduccion().setVisible(true);
+                        new menuProduccion().setVisible(true);
                         this.dispose();
                         acceso = true;
 

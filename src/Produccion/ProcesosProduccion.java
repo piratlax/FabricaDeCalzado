@@ -156,6 +156,11 @@ public class ProcesosProduccion extends javax.swing.JFrame {
         jLabel1.setText("Se tiene programado para hoy");
 
         jButton2.setText("Salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -375,6 +380,12 @@ public class ProcesosProduccion extends javax.swing.JFrame {
             Logger.getLogger(ProcesosProduccion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnIntegrarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        menuProduccion frm=new menuProduccion();
+        frm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -261,7 +261,7 @@ void inicio(){
 
         jLabel9.setText("Unidad");
 
-        cbounidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PAR", "PZA", "ML", "HOJA", "LITRO", "KILO" }));
+        cbounidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PAR", "PZA", "DM", "ML", "HOJA", "LITRO", "KILO" }));
 
         txtId.setFont(new java.awt.Font("Lucida Grande", 0, 5)); // NOI18N
         txtId.setText("CVE");

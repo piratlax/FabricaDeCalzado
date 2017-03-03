@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 
 public class conexion {
-    /*
+    
     public String db="san_felipe";
     public String url="jdbc:mysql://192.168.0.2/"+db+"?zeroDateTimeBehavior=convertToNull";
     public String user="sistema";
@@ -20,11 +20,11 @@ public class conexion {
     public String user="maoriver_root";
     public String pass="sanfelipe7502";
     */
-public String db="san_felipe";
-    public String url="jdbc:mysql://192.168.0.16/"+db+"?zeroDateTimeBehavior=convertToNull";
-    public String user="sistema";
-    public String pass="sanfelipe";
-    
+/*public String db="san_felipe";
+    public String url="jdbc:mysql://localhost/"+db+"?zeroDateTimeBehavior=convertToNull";
+    public String user="root";
+    public String pass="";
+  */  
     public conexion() {
     }
     
