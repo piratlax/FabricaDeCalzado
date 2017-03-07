@@ -29,7 +29,9 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class catalogo extends javax.swing.JFrame {
@@ -440,8 +442,20 @@ public class catalogo extends javax.swing.JFrame {
             new String [] {
                 "Codigo", "Descripcion", "Material", "Unidad", "Consumo", "Precio", "Total"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaMan.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaMan);
+        if (tablaMan.getColumnModel().getColumnCount() > 0) {
+            tablaMan.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         btnBorrar.setText("Borrar");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -1004,36 +1018,46 @@ public class catalogo extends javax.swing.JFrame {
 
         jLabel27.setText("Total de Inyeccion y Terminacion");
 
+        txtSalariosInyeccion.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtSalariosInyeccion.setText("0.00");
 
         jLabel28.setText("SubTotal");
 
         jLabel29.setText("Gastos Indirectos");
 
+        txtGastosInd.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtGastosInd.setText("0.00");
 
         jLabel30.setText("Total Costo de fabricacion");
 
         jLabel31.setText("Utilidad");
 
+        txtPorcentaje.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPorcentaje.setText("20");
 
         jLabel32.setText("%");
 
         jLabel33.setText("Merma");
 
+        txtMerma.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtMerma.setText("0.00");
 
+        txtTotalMan.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtTotalMan.setText("0.00");
 
+        txtTotalCos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtTotalCos.setText("0.00");
 
+        txtTotalIny.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtTotalIny.setText("0.00");
 
+        txtSubTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtSubTotal.setText("0.00");
 
+        txtCostoFabricacion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtCostoFabricacion.setText("0.00");
 
+        txtUtilidad.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtUtilidad.setText("0.00");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -1056,18 +1080,23 @@ public class catalogo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel32))
                     .addComponent(jLabel33))
-                .addGap(100, 100, 100)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtSalariosInyeccion, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                    .addComponent(txtGastosInd)
-                    .addComponent(txtMerma)
-                    .addComponent(txtTotalMan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtTotalCos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtTotalIny, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSubTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCostoFabricacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtUtilidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTotalMan, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                            .addComponent(txtTotalCos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTotalIny, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtSubTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtCostoFabricacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtUtilidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSalariosInyeccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtGastosInd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMerma, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1613,6 +1642,13 @@ public class catalogo extends javax.swing.JFrame {
             for (int i = 0; i < cabecera.length; i++) {
                 tablaMan.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
                 tablaMan.setFont(new java.awt.Font("Tahoma", 0, 12));
+                //alineamos a la derecha
+                DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+                rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+                tablaMan.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+                tablaMan.getColumnModel().getColumn(5).setCellRenderer(rightRenderer);
+                tablaMan.getColumnModel().getColumn(6).setCellRenderer(rightRenderer);
+                
                 txtPredecible.setText("");
                 txtPar.setText("");
                 txtPrecio.setText("");
@@ -1741,6 +1777,12 @@ public class catalogo extends javax.swing.JFrame {
             for (int i = 0; i < cabecera.length; i++) {
                 tablaCos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
                 tablaCos.setFont(new java.awt.Font("Tahoma", 0, 12));
+                //alineamos a la derecha
+                DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+                rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+                tablaMan.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+                tablaMan.getColumnModel().getColumn(5).setCellRenderer(rightRenderer);
+                tablaMan.getColumnModel().getColumn(6).setCellRenderer(rightRenderer);
 
             }
             txtPredecible1.setText("");
@@ -1800,6 +1842,12 @@ public class catalogo extends javax.swing.JFrame {
             for (int i = 0; i < cabecera.length; i++) {
                 tablaIny.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
                 tablaIny.setFont(new java.awt.Font("Tahoma", 0, 12));
+                //alineamos a la derecha
+                DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+                rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+                tablaMan.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+                tablaMan.getColumnModel().getColumn(5).setCellRenderer(rightRenderer);
+                tablaMan.getColumnModel().getColumn(6).setCellRenderer(rightRenderer);
 
             }
             txtPredecible2.setText("");

@@ -372,7 +372,7 @@
                         <Column editable="true" title="Material" type="java.lang.Object"/>
                         <Column editable="true" title="Unidad" type="java.lang.Object"/>
                         <Column editable="true" title="Consumo" type="java.lang.Object"/>
-                        <Column editable="true" title="Precio" type="java.lang.Object"/>
+                        <Column editable="false" title="Precio" type="java.lang.Object"/>
                         <Column editable="true" title="Total" type="java.lang.Object"/>
                       </Table>
                     </Property>
@@ -403,7 +403,7 @@
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -416,7 +416,7 @@
                       </TableColumnModel>
                     </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                      <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -1351,19 +1351,28 @@
                                   </Group>
                                   <Component id="jLabel33" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtSalariosInyeccion" pref="85" max="32767" attributes="0"/>
-                                  <Component id="txtGastosInd" max="32767" attributes="0"/>
-                                  <Component id="txtMerma" max="32767" attributes="0"/>
-                                  <Component id="txtTotalMan" max="32767" attributes="0"/>
-                                  <Component id="txtTotalCos" max="32767" attributes="0"/>
-                                  <Component id="txtTotalIny" max="32767" attributes="0"/>
-                                  <Component id="txtSubTotal" max="32767" attributes="0"/>
-                                  <Component id="txtCostoFabricacion" max="32767" attributes="0"/>
-                                  <Component id="txtUtilidad" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtTotalMan" pref="85" max="32767" attributes="0"/>
+                                          <Component id="txtTotalCos" max="32767" attributes="0"/>
+                                          <Component id="txtTotalIny" max="32767" attributes="0"/>
+                                          <Component id="txtSubTotal" max="32767" attributes="0"/>
+                                          <Component id="txtCostoFabricacion" max="32767" attributes="0"/>
+                                          <Component id="txtUtilidad" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtSalariosInyeccion" alignment="1" min="-2" pref="85" max="-2" attributes="0"/>
+                                          <Component id="txtGastosInd" alignment="1" min="-2" pref="85" max="-2" attributes="0"/>
+                                          <Component id="txtMerma" alignment="1" min="-2" pref="85" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1445,6 +1454,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtSalariosInyeccion">
                       <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="text" type="java.lang.String" value="0.00"/>
                       </Properties>
                     </Component>
@@ -1460,6 +1470,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtGastosInd">
                       <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="text" type="java.lang.String" value="0.00"/>
                       </Properties>
                     </Component>
@@ -1475,6 +1486,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtPorcentaje">
                       <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="text" type="java.lang.String" value="20"/>
                       </Properties>
                     </Component>
@@ -1490,36 +1502,43 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtMerma">
                       <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="text" type="java.lang.String" value="0.00"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="txtTotalMan">
                       <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="text" type="java.lang.String" value="0.00"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="txtTotalCos">
                       <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="text" type="java.lang.String" value="0.00"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="txtTotalIny">
                       <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="text" type="java.lang.String" value="0.00"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="txtSubTotal">
                       <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="text" type="java.lang.String" value="0.00"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="txtCostoFabricacion">
                       <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="text" type="java.lang.String" value="0.00"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="txtUtilidad">
                       <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="text" type="java.lang.String" value="0.00"/>
                       </Properties>
                     </Component>
